@@ -17,8 +17,9 @@ export class HomePage {
 
 	userCreationHandler(user: User) {
 		if (user){
-			this.usrService.createUser(user);
-			console.log("perro");
+			
+			//console.log(this.usrService.createUser(user));
+			this.usrService.createUser(user)
 		} else {
 			console.log("error en la creacion del usuario");
 		}
