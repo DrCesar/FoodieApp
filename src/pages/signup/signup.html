@@ -4,15 +4,15 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      Foodie
+      Crear nueva cuenta
     </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page11" style="background-color:#E44045;">
   <h3 id="crearNuevaCuenta-heading9" style="color:#FFFFFF;text-align:center;">
-    Bienvenido
+    Ingresa tus datos:
   </h3>
-  <!-- <form id="crearNuevaCuenta-form3">
+  <form id="crearNuevaCuenta-form3">
     <ion-list id="crearNuevaCuenta-list5">
       <ion-item id="crearNuevaCuenta-input3">
         <ion-label></ion-label>
@@ -27,11 +27,8 @@
         <ion-input type="password" [(ngModel)]="user.password" name="something" placeholder="Contraseña"></ion-input>
       </ion-item>
     </ion-list>
-  </form> -->
-  <button ion-button id="crearNuevaCuenta-button4" ion-button color="balanced" block (click)="signin()">
+  </form>
+  <button ion-button id="crearNuevaCuenta-button4" ion-button color="balanced" block (click)="userCreationHandler(user)">
     Registrarse
-  </button>
-  <button ion-button id="crearNuevaCuenta-button4" ion-button color="balanced" block (click)="signup()">
-    Inicia Sesion
   </button>
 </ion-content>

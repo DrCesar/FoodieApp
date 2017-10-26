@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { User } from '../../models/user.app.model';
-import { UserProvider } from '../../provider/user.provider';
+import { NavController, AlertController } from 'ionic-angular';
+import { SigninPage } from '../signin/signin';
+import { SignupPage } from '../signup/signup';
+
 
 @Component({
 	selector: 'page-home',
@@ -9,20 +10,18 @@ import { UserProvider } from '../../provider/user.provider';
 })
 export class HomePage {
 
-	user = {} as User;
-
-	constructor(public navCtrl: NavController, public usrService: UserProvider) {
+	constructor(public navCtrl: NavController, public alertCtrl: AlertController) {
 
 	}
 
-	userCreationHandler(user: User) {
-		if (user){
-			
-			//console.log(this.usrService.createUser(user));
-			this.usrService.createUser(user)
-		} else {
-			console.log("error en la creacion del usuario");
-		}
+	signin() {
+		this.navCtrl.push(SigninPage);
 	}
+
+	signup() {
+		this.navCtrl.push(SignupPage);
+	}
+
+	
 
 }
