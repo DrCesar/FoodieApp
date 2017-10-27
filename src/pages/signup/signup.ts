@@ -21,7 +21,7 @@ export class SignupPage {
 
   	ionViewDidLoad() {
 		console.log('ionViewDidLoad SignupPage');
-	}
+	}	
 
   	userCreationHandler(user: User) {
 		if (user){ 
