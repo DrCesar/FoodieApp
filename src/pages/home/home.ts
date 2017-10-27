@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
-import { SigninPage } from '../signin/signin';
-import { SignupPage } from '../signup/signup';
+
+import { UserProvider } from '../../provider/user.provider';
+import { User } from '../../models/user.app.model';
 
 
 @Component({
@@ -10,16 +11,40 @@ import { SignupPage } from '../signup/signup';
 })
 export class HomePage {
 
-	constructor(public navCtrl: NavController, public alertCtrl: AlertController) {
+	user = {} as User;
+	bandSignup;
 
+	constructor(public navCtrl: NavController, public alertCtrl: AlertController, public usrService: UserProvider) {
+		this.bandSignup = false;
 	}
 
-	signin() {
-		this.navCtrl.push(SigninPage);
+	signin(user: User) {
+		if (user) {
+			this.usrService.signin(user).subscribe(data => { alert(data.json().message) });
+		} else {
+			alert("Faltan campos");
+		}
 	}
 
-	signup() {
-		this.navCtrl.push(SignupPage);
+	alert(info) {
+		let alert = this.alertCtrl.create({
+			title: "Error",
+			subTitle: info,
+			buttons: ['OK']
+		});
+		alert.present();
+	}
+
+	preSignup() {
+		this.bandSignup = !this.bandSignup;
+	}
+
+	signup(user: User) {
+		if (user){ 
+			this.usrService.signup(user).subscribe(res => { alert(res.json().message) });
+		} else {
+			alert("Ingrese todos los campos requeridos.")
+		}
 	}
 
 	
