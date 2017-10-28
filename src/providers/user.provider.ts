@@ -14,8 +14,6 @@ export class UserProvider {
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 
-		console.log("privider flag");
-
 		return this.http.post('http://localhost:8080/users/signup', JSON.stringify(user), {headers: headers})
 			.map(res => {return res});
 

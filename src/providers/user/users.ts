@@ -50,13 +50,20 @@ export class UserProvider {
         });
 	}
 
-	createUser(user) {
+	signup(user) {
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 
-		this.http.post(this.url + '/api/user', JSON.stringify(user), {headers: headers})
-			.subscribe(res => {
-				console.log(res.json());
-			});
+		return this.http.post('http://localhost:8080/users/signup', JSON.stringify(user), {headers: headers})
+			.map(res => {return res});
+
+	}
+
+	signin(user) {
+		let headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+
+		return this.http.post('http://localhost:8080/users/signin', JSON.stringify(user), {headers: headers})
+			.map(res => {return res});
 	}
 }
