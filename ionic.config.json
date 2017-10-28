@@ -1,8 +1,6 @@
 {
-  "name": "App",
-  "app_id": "09948b38",
+  "name": "Foodie2.0",
+  "app_id": "",
   "type": "ionic-angular",
-  "integrations": {
-    "cordova": {}
-  }
+  "integrations": {}
 }
