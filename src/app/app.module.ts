@@ -4,16 +4,19 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-
-import { UserProvider } from '../provider/user.provider';
+import { UploadPage } from '../pages/upload/upload';
+import { UserProvider } from '../providers/user.provider';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    UploadPage
   ],
   imports: [
     BrowserModule,
@@ -23,13 +26,18 @@ import { UserProvider } from '../provider/user.provider';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    UploadPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     UserProvider,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    FileTransfer,
+    FileUploadOptions,
+    FileTransferObject,
+    File
   ]
 })
 export class AppModule {}

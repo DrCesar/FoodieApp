@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
+import { UploadPage } from '../upload/upload';
 
-import { UserProvider } from '../../provider/user.provider';
+import { UserProvider } from '../../providers/user.provider';
 import { User } from '../../models/user.app.model';
 
 
@@ -47,6 +48,10 @@ export class HomePage {
 		}
 	}
 
+
+	goToUpload() {
+		this.navCtrl.push(UploadPage);
+	}
 	
 
 }
