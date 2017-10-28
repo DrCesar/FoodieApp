@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Crear nueva cuenta
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page11" style="background-color:#E44045;">
+  <h3 id="crearNuevaCuenta-heading9" style="color:#FFFFFF;text-align:center;">
+    Ingresa tus datos:
+  </h3>
+  <form id="crearNuevaCuenta-form3">
+    <ion-list id="crearNuevaCuenta-list5">
+      <ion-item id="crearNuevaCuenta-input3">
+        <ion-label></ion-label>
+        <ion-input [(ngModel)] = "userInfo.name" [ngModelOptions]="{standalone: true}" type="text" placeholder="Nombre Completo"></ion-input>
+      </ion-item>
+      <ion-item id="crearNuevaCuenta-input7">
+        <ion-label></ion-label>
+        <ion-input [(ngModel)] = "userInfo.user" [ngModelOptions]="{standalone: true}" type="text" placeholder="Usuario"></ion-input>
+      </ion-item>
+      <ion-item id="crearNuevaCuenta-input4">
+        <ion-label></ion-label>
+        <ion-input [(ngModel)] = "userInfo.email" [ngModelOptions]="{standalone: true}" type="email" placeholder="Correo Electrónico"></ion-input>
+      </ion-item>
+      <ion-item id="crearNuevaCuenta-input5">
+        <ion-label></ion-label>
+        <ion-input [(ngModel)] = "userInfo.pass" [ngModelOptions]="{standalone: true}" type="password" placeholder="Contraseña"></ion-input>
+      </ion-item>
+      <ion-item id="crearNuevaCuenta-input6">
+        <ion-label></ion-label>
+        <ion-input [(ngModel)] = "passCon" [ngModelOptions]="{standalone: true}" type="password" placeholder="Confirmar contraseña"></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
+  <button id="crearNuevaCuenta-button4" ion-button color="balanced" block on-click="validatePassword()">
+    Registrarse
+  </button>
+</ion-content>

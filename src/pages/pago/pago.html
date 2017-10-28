@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Método de Pago
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page6" style="background-color:#ffffff; font-family: Noto Sans; font-size:medium">
+<div class="logos">  
+    <img src="assets/img/creditcard.png" style="width:80px; height:80px">
+    <img src="assets/img/debitcard.png" style="width:80px; height:80px">
+    <img src="assets/img/efectivo.png" style="width:80px; height:80px">
+</div> 
+<br>
+<br>
+<form>   
+    <ion-list id="listaTarjeta" >
+        <ion-item>
+          <ion-label color="primary">Nombre en la tarjeta</ion-label>
+          <ion-input placeholder="Escriba aquí"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary">Número tarjeta</ion-label>
+          <ion-input placeholder="Escriba aquí"></ion-input>
+        </ion-item>
+        <ion-item>  
+          <ion-label color="primary">Fecha de vencimiento</ion-label>
+          <ion-input type="date"  placeholder="Text Input"></ion-input>
+        </ion-item>
+    </ion-list>
+</form>
+<br>
+<button id="login-button1" ion-button color="secondary">
+    Confirmar Pago
+</button>
+<br>
+<button id="login-button1" large ion-button color="primary">
+  Pagar en efectivo
+</button>
+
+
+  

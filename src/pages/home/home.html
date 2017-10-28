@@ -1,46 +1,14 @@
-<ion-content padding id="page10" style="background-color:#E44045;">
-  <div>
-    <img src="assets/img/foodieLogo.png" style="display:block;width:45%;height:auto;margin-left:auto;margin-right:auto;" />
-  </div>
-  <h3 id="login-heading8" style="color:#FFFFFF;text-align:center;">
-    ¡Bienvenido a Foodie!
-  </h3>
-  <form id="login-form2">
-    <ion-list id="login-list4">
-      <ion-item id="login-input1">
-        <ion-label></ion-label>
-        <ion-input type="text"  [(ngModel)]="user.username"  name="something" placeholder="Username"></ion-input>
-      </ion-item>
-      <ion-item id="login-input2" [hidden]="!bandSignup">
-        <ion-label></ion-label>
-        <ion-input type="email" [(ngModel)]="user.email"  name="something" placeholder="Correo Electrónico"></ion-input>
-      </ion-item>
-      <ion-item id="login-input3">
-        <ion-label></ion-label>
-        <ion-input type="password" [(ngModel)]="user.password" name="something" placeholder="Contraseña"></ion-input>
-      </ion-item>
-    </ion-list>
-    <button id="login-button1" [hidden]="bandSignup" ion-button color="secondary" block on-click="signin(user)">
-      Iniciar sesión
-    </button>
-    <button id="login-button2" [hidden]="bandSignup" ion-button color="positive" block on-click="preSignup()">
-      Crear nueva cuenta
-    </button>
-    <button id="login-button3" [hidden]="!bandSignup" ion-button color="positive" block on-click="signup(user)">
-      Registrarse
-    </button>
-    <button id="login-button4" [hidden]="!bandSignup" ion-button color="assertive" block on-click="preSignup()">
-      Atras
-    </button>
-    <button id="login-button5" ion-button color="assertive" block on-click="goToUpload()">
-      Upload IMG
-    </button>
-    <div class="spacer" style="height:40px;" id="login-spacer3"></div>
-    <button id="login-button5" ion-button clear color="assertive" block small style="color:#FFFFFF;font-size:14px;" on-click="goToRecuperarContraseA()">
-      Olvidé mi contraseña
-    </button>
-  </form>
-  <h5 id="login-heading7" style="color:#FFFFFF;font-weight:lighter;font-style:italic;text-align:center;">
-    Foodie© 2017
-  </h5>
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  The world is your oyster.
+  <p>
+    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
+  </p>
 </ion-content>

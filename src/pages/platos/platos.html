@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Platos
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page14" style="background-color:#E44045;">
+  <ion-list id="platos-list8">
+    <ion-item-sliding  *ngFor="let plato of menu" block on-click="addToCart(plato._id)">
+      <ion-item color="assertive">
+        {{plato.name}}
+        <ion-note item-right>
+          Q.{{plato.price}}.00
+        </ion-note>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="energized" block on-click="addToCart(plato._id)">
+            Agregar al carrito
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
