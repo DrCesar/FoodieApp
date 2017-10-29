@@ -239,18 +239,18 @@ var PedidoActualPage = (function () {
         this.userService = userService;
         this.navParams = navParams;
         this.alertCtrl = alertCtrl;
-        this.userID = "59f254ae3ddb192a3c18e7da";
+        this.userID = "59f509b3fa11c731b0e6f1de";
+        this.totalPrice = 0;
     }
-    PedidoActualPage.prototype.ionViewDidLoad = function () {
+    PedidoActualPage.prototype.ionViewDidEnter = function () {
         var _this = this;
         this.userService.getCartByUser(this.userID).then(function (data) {
+            _this.totalPrice = 0;
             _this.cart = data;
+            for (var i = 0; i < _this.cart.length; i++) {
+                _this.totalPrice += _this.cart[i].price;
+            }
         });
-        var alert = this.alertCtrl.create({
-            title: this.cart,
-            buttons: ['Dismiss']
-        });
-        alert.present();
     };
     PedidoActualPage.prototype.goToPago = function (params) {
         if (!params)
@@ -261,14 +261,12 @@ var PedidoActualPage = (function () {
 }());
 PedidoActualPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-pedido-actual',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\pedido-actual\pedido-actual.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>\n\n      Pedido Actual\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page6" style="background-color:#FFFFFF;">\n\n  <h3 id="pedidoActual-heading2" style="color:#000000;"></h3>\n\n  <ion-list id="pedidoActual-list2">\n\n    <ion-item-sliding *ngFor="let item of cart">\n\n      <ion-item color="none" id="pedidoActual-list-item12">\n\n          {{item}}\n\n        <ion-note item-right>\n\n          Q72.00\n\n        </ion-note>\n\n        <ion-icon name="arrow-forward" item-left></ion-icon>\n\n        <p>Arrastrar a la derecha para opciones</p>\n\n      </ion-item>\n\n      <ion-item-options side="left">\n\n        <button ion-button color="danger">\n\n          Eliminar\n\n        </button>\n\n        <button ion-button color="energized">\n\n          Comentarios\n\n        </button>\n\n      </ion-item-options>\n\n    </ion-item-sliding>\n\n  </ion-list>\n\n  <div id="pedidoActual-markdown6" class="show-list-numbers-and-dots">\n\n    <p style="color:#000000;">\n\n      Su total:\n\n      <strong>\n\n        Q229.00\n\n      </strong>\n\n    </p>\n\n  </div>\n\n  <button id="pedidoActual-button10" ion-button color="danger">\n\n    Eliminar pedido\n\n  </button>\n\n  <button id="pedidoActual-button11" ion-button color="secondary" style="border-radius:5px 5px 5px 5px;" on-click="goToPago()">\n\n    Confirmar pedido\n\n  </button>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\pedido-actual\pedido-actual.html"*/
+        selector: 'page-pedido-actual',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\pedido-actual\pedido-actual.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>\n\n      Pedido Actual\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page6" style="background-color:#FFFFFF;">\n\n  <h3 id="pedidoActual-heading2" style="color:#000000;"></h3>\n\n  <ion-list id="pedidoActual-list2">\n\n    <ion-item-sliding *ngFor="let item of cart">\n\n      <ion-item color="none" id="pedidoActual-list-item12">\n\n          {{item.name}}\n\n        <ion-note item-right>\n\n          Q.{{item.price}}.00\n\n        </ion-note>\n\n        <ion-icon name="arrow-forward" item-left></ion-icon>\n\n        <p>Arrastrar a la derecha para opciones</p>\n\n      </ion-item>\n\n      <ion-item-options side="left">\n\n        <button ion-button color="danger">\n\n          Eliminar\n\n        </button>\n\n        <button ion-button color="energized">\n\n          Comentarios\n\n        </button>\n\n      </ion-item-options>\n\n    </ion-item-sliding>\n\n  </ion-list>\n\n  <div id="pedidoActual-markdown6" class="show-list-numbers-and-dots">\n\n    <p style="color:#000000;">\n\n      Su total:\n\n      <strong>\n\n        Q.{{totalPrice}}.00\n\n      </strong>\n\n    </p>\n\n  </div>\n\n  <button id="pedidoActual-button10" ion-button color="danger">\n\n    Eliminar pedido\n\n  </button>\n\n  <button id="pedidoActual-button11" ion-button color="secondary" style="border-radius:5px 5px 5px 5px;" on-click="goToPago()">\n\n    Confirmar pedido\n\n  </button>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\pedido-actual\pedido-actual.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_3__providers_user_users__["a" /* UserProvider */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__providers_user_users__["a" /* UserProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_user_users__["a" /* UserProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object])
 ], PedidoActualPage);
 
+var _a, _b, _c, _d;
 //# sourceMappingURL=pedido-actual.js.map
 
 /***/ }),
@@ -490,7 +488,6 @@ PerfilPage = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UploadPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_file_chooser__ = __webpack_require__(256);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -502,7 +499,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
 /**
  * Generated class for the UploadPage page.
  *
@@ -510,29 +506,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var UploadPage = (function () {
-    function UploadPage(fileChooser, navCtrl, navParams) {
-        this.fileChooser = fileChooser;
+    function UploadPage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.imgPath = '../../assets/img/empty.png';
     }
-    UploadPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad UploadPage');
-    };
-    UploadPage.prototype.uploadImg = function () {
-        this.fileChooser.open()
-            .then(function (uri) { return console.log(uri); })
-            .catch(function (e) { return console.log(e); });
-    };
     return UploadPage;
 }());
 UploadPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-upload',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\upload\upload.html"*/'<!--\n\n  Generated template for the UploadPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>upload</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n	<div>\n\n		<img [src]= "imgPath"/>\n\n	</div>\n\n	<ion-item>\n\n		<button ion-button on-click="uploadImg()">Upload Image</button>\n\n	</ion-item>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\upload\upload.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__ionic_native_file_chooser__["a" /* FileChooser */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object])
 ], UploadPage);
 
+var _a, _b;
 //# sourceMappingURL=upload.js.map
 
 /***/ }),
@@ -978,7 +965,7 @@ var PlatosPage = (function () {
         this.navParams = navParams;
         this.navCtrl = navCtrl;
         this.alertCtrl = alertCtrl;
-        this.userID = "59f254ae3ddb192a3c18e7da";
+        this.userID = "59f509b3fa11c731b0e6f1de";
     }
     PlatosPage.prototype.ionViewDidLoad = function () {
         var _this = this;
@@ -997,13 +984,10 @@ PlatosPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-platos',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\platos\platos.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>\n\n      Platos\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page14" style="background-color:#E44045;">\n\n  <ion-list id="platos-list8">\n\n    <ion-item-sliding  *ngFor="let plato of menu" block on-click="addToCart(plato._id)">\n\n      <ion-item color="assertive">\n\n        {{plato.name}}\n\n        <ion-note item-right>\n\n          Q.{{plato.price}}.00\n\n        </ion-note>\n\n      </ion-item>\n\n      <ion-item-options side="right">\n\n        <button ion-button color="energized" block on-click="addToCart(plato._id)">\n\n            Agregar al carrito\n\n        </button>\n\n      </ion-item-options>\n\n    </ion-item-sliding>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\platos\platos.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_information_information__["a" /* InformationProvider */],
-        __WEBPACK_IMPORTED_MODULE_3__providers_user_users__["a" /* UserProvider */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_information_information__["a" /* InformationProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_information_information__["a" /* InformationProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__providers_user_users__["a" /* UserProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_user_users__["a" /* UserProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _e || Object])
 ], PlatosPage);
 
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=platos.js.map
 
 /***/ }),
@@ -1166,10 +1150,9 @@ var UserProvider = (function () {
 }());
 UserProvider = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
 ], UserProvider);
 
-var _a;
 //# sourceMappingURL=users.js.map
 
 /***/ }),
