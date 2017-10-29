@@ -7,15 +7,16 @@ export class UserProvider {
 
 	url: any;
 	data: any;
+	userID: any;
 
 	constructor(public http: Http) {
 		this.url = "http://localhost:8080";
 		this.data = null;
 	}
 
-	addToCart(user, item) {
+	addToCart(item) {
 		let cartData = {
-			userID: user,
+			userID: this.userID,
 			itemID: item
 		}
 
@@ -28,9 +29,9 @@ export class UserProvider {
 			});
 	}
 
-	getCartByUser(userID) {
+	getCartByUser() {
         return new Promise(resolve => {
-            this.http.get(this.url + '/api/user/cart/'+userID)
+            this.http.get(this.url + '/api/user/cart/'+this.userID)
                 .map(res => res.json())
                 .subscribe(data => {
                     this.data = data;
@@ -64,6 +65,9 @@ export class UserProvider {
 		headers.append('Content-Type', 'application/json');
 
 		return this.http.post('http://localhost:8080/users/signin', JSON.stringify(user), {headers: headers})
-			.map(res => {return res});
+			.map(res => {
+				this.userID = res.json().userID;
+				return res;
+			});
 	}
 }

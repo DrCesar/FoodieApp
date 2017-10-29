@@ -11,7 +11,6 @@ import { AlertController } from 'ionic-angular';
 })
 export class PedidoActualPage {
 
-    userID: string = "59f509b3fa11c731b0e6f1de";
     cart: any;
     totalPrice: number = 0;
 
@@ -23,7 +22,7 @@ export class PedidoActualPage {
   }
 
   ionViewDidEnter(){
-    this.userService.getCartByUser(this.userID).then((data) => {
+    this.userService.getCartByUser().then((data) => {
         this.totalPrice = 0;
         this.cart = data;
         for (var i = 0; i < this.cart.length; i++) {

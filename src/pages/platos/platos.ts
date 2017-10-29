@@ -34,7 +34,7 @@ export class PlatosPage {
   }
 
   addToCart(itemID) {
-      this.userService.addToCart(this.userID, itemID);
+      this.userService.addToCart(itemID);
   }
 
 }
