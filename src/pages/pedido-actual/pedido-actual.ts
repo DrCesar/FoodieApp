@@ -11,8 +11,9 @@ import { AlertController } from 'ionic-angular';
 })
 export class PedidoActualPage {
 
-    userID: string = "59f254ae3ddb192a3c18e7da";
+    userID: string = "59f509b3fa11c731b0e6f1de";
     cart: any;
+    totalPrice: number = 0;
 
   constructor(public navCtrl: NavController,
   public userService: UserProvider,
@@ -21,15 +22,14 @@ export class PedidoActualPage {
 
   }
 
-  ionViewDidLoad(){
+  ionViewDidEnter(){
     this.userService.getCartByUser(this.userID).then((data) => {
-      this.cart = data;
+        this.totalPrice = 0;
+        this.cart = data;
+        for (var i = 0; i < this.cart.length; i++) {
+          this.totalPrice += this.cart[i].price;
+        }
     });
-    const alert = this.alertCtrl.create({
-        title: this.cart,
-        buttons: ['Dismiss']
-      });
-      alert.present();
   }
 
   goToPago(params){

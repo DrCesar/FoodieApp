@@ -25,18 +25,18 @@ export class LoginPage {
   }
 
   signin(user: User) {
-    if (user) {
-      this.usrService.signin(user).subscribe(data => { 
-        
-        if (data.json().message == "Inicio de Sesion.")
-          this.navCtrl.push(TabsControllerPage);
-        else
-          alert(data.json().message);
-      });
-    } else {
-      alert("Faltan campos");
+      if (user) {
+        this.usrService.signin(user).subscribe(data => {
+
+          if (data.json().message == "Inicio de Sesion.")
+            this.navCtrl.push(TabsControllerPage);
+          else
+            alert(data.json().message);
+        });
+      } else {
+        alert("Faltan campos");
+      }
     }
-  }
 
   alert(info) {
     let alert = this.alertCtrl.create({
@@ -52,7 +52,7 @@ export class LoginPage {
   }
 
   signup(user: User) {
-    if (user){ 
+    if (user){
       this.usrService.signup(user).subscribe(res => { alert(res.json().message) });
     } else {
       alert("Ingrese todos los campos requeridos.")
@@ -63,7 +63,7 @@ export class LoginPage {
   goToUpload() {
     this.navCtrl.push(UploadPage);
   }
-  
+
   goToRecuperarContraseA(params){
     if (!params) params = {};
     this.navCtrl.push(RecuperarContraseAPage);

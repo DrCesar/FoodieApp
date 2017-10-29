@@ -13,9 +13,9 @@
   <ion-list id="pedidoActual-list2">
     <ion-item-sliding *ngFor="let item of cart">
       <ion-item color="none" id="pedidoActual-list-item12">
-          {{item}}
+          {{item.name}}
         <ion-note item-right>
-          Q72.00
+          Q.{{item.price}}.00
         </ion-note>
         <ion-icon name="arrow-forward" item-left></ion-icon>
         <p>Arrastrar a la derecha para opciones</p>
@@ -34,7 +34,7 @@
     <p style="color:#000000;">
       Su total:
       <strong>
-        Q229.00
+        Q.{{totalPrice}}.00
       </strong>
     </p>
   </div>
