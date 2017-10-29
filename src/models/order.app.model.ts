@@ -2,8 +2,8 @@ import { Item } from './item.app.model';
 
 export interface Order {
 
-	user: string,
-	items: Item[],
+	owner: string,
+	items: [string],
 	price: number,
-	discount: number
+	restaurant: string
 }

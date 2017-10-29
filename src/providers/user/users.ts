@@ -10,8 +10,25 @@ export class UserProvider {
 	userID: any;
 
 	constructor(public http: Http) {
+		this.url
 		this.url = "http://localhost:8080";
 		this.data = null;
+	}
+
+	postOrder(order) {
+		
+		let headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		order.owner = this.userID;
+
+		return new Promise(resolve => {
+			this.http.post(this.url + '/api/order', JSON.stringify(order), {headers: headers})
+			.subscribe(data => {
+				this.data = data
+				resolve(this.data);
+			});
+		});
+		
 	}
 
 	addToCart(item) {
@@ -78,6 +95,7 @@ export class UserProvider {
 		return this.http.post(this.url + '/users/signin', JSON.stringify(user), {headers: headers})
 			.map(res => {
 				this.userID = res.json().userID;
+				console.log(this.userID);
 				return res;
 			});
 	}

@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { PagoPage } from '../pago/pago';
 import { TabsControllerPage } from '../tabs-controller/tabs-controller';
 import { UserProvider } from '../../providers/user/users';
+import { Order } from '../../models/order.app.model';
 import { AlertController } from 'ionic-angular';
 
 @Component({
@@ -13,6 +14,7 @@ export class PedidoActualPage {
 
     cart: any;
     totalPrice: number = 0;
+    order = {} as Order;
 
   constructor(public navCtrl: NavController,
   public userService: UserProvider,
@@ -32,8 +34,49 @@ export class PedidoActualPage {
   }
 
   goToPago(params){
-    if (!params) params = {};
-    this.navCtrl.push(PagoPage)
+     this.confirmAlert();
+  }
+
+
+  alert(info) {
+    let alert = this.alertCtrl.create({
+      title: "Error",
+      subTitle: info,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  confirmAlert() {
+    let alert = this.alertCtrl.create({
+    title: 'Confirmar Orden',
+    message: 'Desea Confirmar la Orden',
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {
+          return false;
+        }
+      },
+      {
+        text: 'Buy',
+        handler: () => {
+          this.postOrder();
+        }
+      }
+    ]
+  });
+  alert.present();
+  }
+
+  postOrder() {
+    this.order.items = this.cart;
+    this.order.restaurant = "LinLin";
+    this.userService.postOrder(this.order).then(data => {
+      alert(data.json().message);
+    });
+    this.navCtrl.push(TabsControllerPage);
   }
 
 }
