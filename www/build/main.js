@@ -1256,10 +1256,14 @@ var UserProvider = (function () {
         });
     };
     UserProvider.prototype.signup = function (user) {
+        var _this = this;
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Content-Type', 'application/json');
         return this.http.post(this.url + '/users/signup', JSON.stringify(user), { headers: headers })
-            .map(function (res) { return res; });
+            .map(function (res) {
+            _this.userID = res.json().userID;
+            return res;
+        });
     };
     UserProvider.prototype.signin = function (user) {
         var _this = this;

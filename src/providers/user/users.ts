@@ -86,7 +86,10 @@ export class UserProvider {
 		headers.append('Content-Type', 'application/json');
 
 		return this.http.post(this.url + '/users/signup', JSON.stringify(user), {headers: headers})
-			.map(res => {return res});
+			.map(res => {
+				this.userID = res.json().userID;
+				return res;
+			});
 
 	}
 
