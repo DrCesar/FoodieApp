@@ -53,7 +53,12 @@ export class LoginPage {
 
   signup(user: User) {
     if (user){
-      this.usrService.signup(user).subscribe(res => { alert(res.json().message) });
+      this.usrService.signup(user).subscribe(data => { 
+
+      if (data.json().message == "El usuario ha sido creado.")
+            this.navCtrl.push(TabsControllerPage);
+          else
+            alert(data.json().message); });
     } else {
       alert("Ingrese todos los campos requeridos.")
     }

@@ -23,8 +23,10 @@ export class UserProvider {
 
 		return new Promise(resolve => {
 			this.http.post(this.url + '/api/order', JSON.stringify(order), {headers: headers})
+			.map(res => res.json())
 			.subscribe(data => {
 				this.data = data
+				alert(data.message);
 				resolve(this.data);
 			});
 		});
@@ -95,7 +97,6 @@ export class UserProvider {
 		return this.http.post(this.url + '/users/signin', JSON.stringify(user), {headers: headers})
 			.map(res => {
 				this.userID = res.json().userID;
-				console.log(this.userID);
 				return res;
 			});
 	}

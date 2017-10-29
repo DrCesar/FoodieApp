@@ -10,7 +10,7 @@ export class OrderProvider {
 	data: any;
 
 	constructor(public http: Http) {
-		this.userID = 
+		
 		this.url = "http://localhost:8080";
 		this.data = null;
 	}

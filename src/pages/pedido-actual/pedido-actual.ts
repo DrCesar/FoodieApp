@@ -74,9 +74,9 @@ export class PedidoActualPage {
     this.order.items = this.cart;
     this.order.restaurant = "LinLin";
     this.userService.postOrder(this.order).then(data => {
-      alert(data.json().message);
+      this.navCtrl.push(TabsControllerPage);
     });
-    this.navCtrl.push(TabsControllerPage);
+    
   }
 
 }
