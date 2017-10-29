@@ -40,6 +40,17 @@ export class UserProvider {
         });
 	}
 
+	deleteFromCart(item) {
+        return new Promise(resolve => {
+            this.http.get(this.url + '/api/user/cart/delete/:'+this.userID+'/'+item)
+                .map(res => res.json())
+                .subscribe(data => {
+                    this.data = data;
+                    resolve(this.data);
+                });
+        });
+	}
+
 	getUser(user) {
         return new Promise(resolve => {
             this.http.get(this.url + '/api/user/'+user.email+"/"+user.user)
@@ -55,7 +66,7 @@ export class UserProvider {
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 
-		return this.http.post('http://localhost:8080/users/signup', JSON.stringify(user), {headers: headers})
+		return this.http.post(this.url + '/users/signup', JSON.stringify(user), {headers: headers})
 			.map(res => {return res});
 
 	}
@@ -64,7 +75,7 @@ export class UserProvider {
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 
-		return this.http.post('http://localhost:8080/users/signin', JSON.stringify(user), {headers: headers})
+		return this.http.post(this.url + '/users/signin', JSON.stringify(user), {headers: headers})
 			.map(res => {
 				this.userID = res.json().userID;
 				return res;
