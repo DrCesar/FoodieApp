@@ -23,17 +23,14 @@
     <button id="login-button1" [hidden]="bandSignup" ion-button color="secondary" block on-click="signin(user)"> 
       Iniciar sesión 
     </button> 
-    <button id="login-button2" [hidden]="bandSignup" ion-button color="positive" block on-click="preSignup()"> 
+    <button id="login-button2" [hidden]="bandSignup" ion-button color="primary" block on-click="preSignup()"> 
       Crear nueva cuenta 
     </button> 
-    <button id="login-button3" [hidden]="!bandSignup" ion-button color="positive" block on-click="signup(user)"> 
+    <button id="login-button3" [hidden]="!bandSignup" ion-button color="secondary" block on-click="signup(user)"> 
       Registrarse 
     </button> 
-    <button id="login-button4" [hidden]="!bandSignup" ion-button color="assertive" block on-click="preSignup()"> 
+    <button id="login-button4" [hidden]="!bandSignup" ion-button color="primary" block on-click="preSignup()"> 
       Atras 
-    </button> 
-    <button id="login-button5" ion-button color="assertive" block on-click="goToUpload()"> 
-      Upload IMG 
     </button> 
     <div class="spacer" style="height:40px;" id="login-spacer3"></div> 
     <button id="login-button5" ion-button clear color="assertive" block small style="color:#FFFFFF;font-size:14px;" on-click="goToRecuperarContraseA()"> 

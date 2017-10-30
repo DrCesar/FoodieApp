@@ -18,7 +18,9 @@
   <div class="spacer" style="width:300px;height:9px;" id="inicio-spacer2"></div>
   <ion-list id="inicio-list3">
     <ion-item color="assertive" class="text" *ngFor="let item of foodTypes" on-tap="goToRestaurants(item.value)">
+      <h2 id="inicio-heading4" style="color:rgb(156, 21, 21);text-align:center;">
         {{item.name}}
+      </h2>
     </ion-item>
   </ion-list>
   <h5 id="inicio-heading4" style="color:#FFFFFF;font-weight:lighter;font-style:italic;text-align:center;">

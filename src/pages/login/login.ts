@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
-import { UploadPage } from '../upload/upload';
 
 import { UserProvider } from '../../providers/user/users';
 import { User } from '../../models/user.app.model';
@@ -62,11 +61,6 @@ export class LoginPage {
     } else {
       alert("Ingrese todos los campos requeridos.")
     }
-  }
-
-
-  goToUpload() {
-    this.navCtrl.push(UploadPage);
   }
 
   goToRecuperarContraseA(params){

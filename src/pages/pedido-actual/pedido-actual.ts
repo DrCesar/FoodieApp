@@ -50,6 +50,37 @@ export class PedidoActualPage {
     }
   }
 
+  reiniciarOrden() {
+    let alert = this.alertCtrl.create({
+      title: '¿Desea eliminar su orden?',
+      message: 'Se eliminarán todos los platos que haya agregado.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Confirmar',
+          handler: () => {
+            this.eliminarTodo();
+          }
+        }
+      ]
+    });
+    alert.present();
+}
+
+  eliminarTodo(){
+    for (var i = 0; i < this.cart.length; i++) {
+      this.userService.deleteFromCart(this.cartID[i]).then((data) => {
+        this.totalPrice = 0;
+        this.cartID = data;
+        this.cart = [];
+        this.getItemsById(0, function(){});
+    });
+    }
+  }
+
   deleteItem(item) {
       let index = 0;
       for (var i = 0; i < this.cart.length; i++) {
@@ -82,18 +113,15 @@ export class PedidoActualPage {
 
   confirmAlert() {
     let alert = this.alertCtrl.create({
-    title: 'Confirmar Orden',
-    message: 'Desea Confirmar la Orden',
+    title: '¿Desea Confirmar la orden?',
+    message: 'La orden será enviada al restaurante si elige "Confirmar"',
     buttons: [
       {
-        text: 'Cancel',
-        role: 'cancel',
-        handler: () => {
-          return false;
-        }
+        text: 'Cancelar',
+        role: 'cancel'
       },
       {
-        text: 'Buy',
+        text: 'Confirmar',
         handler: () => {
           this.postOrder();
         }

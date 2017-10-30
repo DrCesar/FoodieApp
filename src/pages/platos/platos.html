@@ -12,13 +12,17 @@
   <ion-list id="platos-list8">
     <ion-item-sliding  *ngFor="let plato of menu">
       <ion-item color="assertive">
-        {{plato.name}}
+          <h2 id="inicio-heading4" style="color:rgb(156, 21, 21);text-align:left;">
+              {{plato.name}}
+            </h2>
         <ion-note item-right>
           Q.{{plato.price}}.00
         </ion-note>
+        <ion-icon name="arrow-forward" item-left></ion-icon>
+        <p>Arrastrar a la derecha para agregar a mi pedido</p>
       </ion-item>
-      <ion-item-options side="right">
-        <button ion-button color="energized" on-tap ="addToCart(plato._id)">
+      <ion-item-options side="left">
+        <button ion-button color="secondary" on-tap ="addToCart(plato._id)">
             Agregar al carrito
         </button>
       </ion-item-options>

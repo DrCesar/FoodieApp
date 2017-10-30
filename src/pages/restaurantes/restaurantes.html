@@ -11,7 +11,9 @@
 <ion-content padding id="page13" style="background-color:#E44045;">
   <ion-list id="restaurantes-list7">
       <ion-item color="assertive" class="text" *ngFor="let restaurant of restaurants" on-tap="goToCategorias(restaurant.name)">
+        <h2 id="inicio-heading4" style="color:rgb(156, 21, 21);text-align:center;">
           {{restaurant.name}}
+        </h2>
       </ion-item>
   </ion-list>
 </ion-content>
