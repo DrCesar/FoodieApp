@@ -13,6 +13,7 @@ import { AlertController } from 'ionic-angular';
 export class PedidoActualPage {
 
     cart: any;
+    cartID: any;
     totalPrice: number = 0;
     order = {} as Order;
 
@@ -26,11 +27,43 @@ export class PedidoActualPage {
   ionViewDidEnter(){
     this.userService.getCartByUser().then((data) => {
         this.totalPrice = 0;
-        this.cart = data;
-        for (var i = 0; i < this.cart.length; i++) {
-          this.totalPrice += this.cart[i].price;
-        }
+        this.cartID = data;
+        this.cart = [];
+        this.getItemsById(0, function(){});
     });
+  }
+
+  getItemsById(i, callback) {
+    if (i < this.cartID.length) {
+        this.userService.getItemById(this.cartID[i]).then((data) => {
+            let temp: any;
+            temp = data;
+            this.cart.push({
+               name: temp.name,
+               price: temp.price
+            });
+            this.totalPrice += temp.price;
+            this.getItemsById(i+1, callback);
+        });
+    } else {
+        callback();
+    }
+  }
+
+  deleteItem(item) {
+      let index = 0;
+      for (var i = 0; i < this.cart.length; i++) {
+          if (this.cart[i].name == item){
+              index = i;
+              break;
+          }
+      }
+      this.userService.deleteFromCart(this.cartID[index]).then((data) => {
+          this.totalPrice = 0;
+          this.cartID = data;
+          this.cart = [];
+          this.getItemsById(0, function(){});
+      });
   }
 
   goToPago(params){
@@ -76,7 +109,7 @@ export class PedidoActualPage {
     this.userService.postOrder(this.order).then(data => {
       this.navCtrl.push(TabsControllerPage);
     });
-    
+
   }
 
 }

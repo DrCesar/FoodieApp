@@ -10,7 +10,7 @@
 </ion-header>
 <ion-content padding id="page14" style="background-color:#E44045;">
   <ion-list id="platos-list8">
-    <ion-item-sliding  *ngFor="let plato of menu" block on-click="addToCart(plato._id)">
+    <ion-item-sliding  *ngFor="let plato of menu">
       <ion-item color="assertive">
         {{plato.name}}
         <ion-note item-right>
@@ -18,7 +18,7 @@
         </ion-note>
       </ion-item>
       <ion-item-options side="right">
-        <button ion-button color="energized" block on-click="addToCart(plato._id)">
+        <button ion-button color="energized" on-tap ="addToCart(plato._id)">
             Agregar al carrito
         </button>
       </ion-item-options>

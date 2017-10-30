@@ -16,7 +16,7 @@ export class UserProvider {
 	}
 
 	postOrder(order) {
-		
+
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 		order.owner = this.userID;
@@ -30,7 +30,7 @@ export class UserProvider {
 				resolve(this.data);
 			});
 		});
-		
+
 	}
 
 	addToCart(item) {
@@ -61,7 +61,7 @@ export class UserProvider {
 
 	deleteFromCart(item) {
         return new Promise(resolve => {
-            this.http.get(this.url + '/api/user/cart/delete/:'+this.userID+'/'+item)
+            this.http.get(this.url + '/api/user/cart/delete/'+this.userID+'/'+item)
                 .map(res => res.json())
                 .subscribe(data => {
                     this.data = data;
@@ -70,9 +70,9 @@ export class UserProvider {
         });
 	}
 
-	getUser(user) {
+	getItemById(id) {
         return new Promise(resolve => {
-            this.http.get(this.url + '/api/user/'+user.email+"/"+user.user)
+            this.http.get(this.url + '/api/menu/item/' + id)
                 .map(res => res.json())
                 .subscribe(data => {
                     this.data = data;
