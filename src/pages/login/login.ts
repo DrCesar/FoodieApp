@@ -18,6 +18,7 @@ export class LoginPage {
 
   user = {} as User;
   bandSignup;
+  passCon: string;
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public usrService: UserProvider) {
     this.bandSignup = false;
@@ -48,11 +49,25 @@ export class LoginPage {
 
   preSignup() {
     this.bandSignup = !this.bandSignup;
+    this.user.username = "";
+    this.user.password = "";
+  }
+
+  validatePassword() {
+    if (this.passCon != this.user.password){
+        let alert = this.alertCtrl.create({
+          title: "Las contraseñas no coinciden.",
+          buttons: ['OK']
+        });
+        alert.present();
+    } else {
+        this.signup(this.user);
+    }
   }
 
   signup(user: User) {
     if (user){
-      this.usrService.signup(user).subscribe(data => { 
+      this.usrService.signup(user).subscribe(data => {
 
       if (data.json().message == "El usuario ha sido creado.")
             this.navCtrl.push(TabsControllerPage);

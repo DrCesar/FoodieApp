@@ -62,7 +62,7 @@ export class PedidoActualPage {
         {
           text: 'Confirmar',
           handler: () => {
-            this.eliminarTodo();
+            this.deleteAll();
           }
         }
       ]
@@ -70,14 +70,15 @@ export class PedidoActualPage {
     alert.present();
 }
 
-  eliminarTodo(){
-    for (var i = 0; i < this.cart.length; i++) {
-      this.userService.deleteFromCart(this.cartID[i]).then((data) => {
-        this.totalPrice = 0;
-        this.cartID = data;
+  deleteAll(){
+    if (this.cartID.length > 0) {
+        this.userService.deleteFromCart(this.cartID[0]).then((data) => {
+            this.cartID.splice(0, 1);
+            this.deleteAll();
+        });
+    } else {
         this.cart = [];
-        this.getItemsById(0, function(){});
-    });
+        this.totalPrice = 0;
     }
   }
 
