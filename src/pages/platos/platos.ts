@@ -13,7 +13,6 @@ export class PlatosPage {
   menu: any;
   restaurant: any;
   option: any;
-  userID: string = "59f509b3fa11c731b0e6f1de";
 
 
   constructor(public informationService: InformationProvider,

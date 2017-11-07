@@ -7,7 +7,7 @@ import { User } from '../../models/user.app.model';
 import { RecuperarContraseAPage } from '../recuperar-contrase-a/recuperar-contrase-a';
 import { InicioPage } from '../inicio/inicio';
 import { CategorAsPage } from '../categor-as/categor-as';
-import { PlatosPage } from '../platos/platos';;
+import { PlatosPage } from '../platos/platos';
 import { CrearNuevaCuentaPage } from '../crear-nueva-cuenta/crear-nueva-cuenta';
 import { TabsControllerPage } from '../tabs-controller/tabs-controller';
 @Component({
