@@ -40,9 +40,10 @@ export class PedidoActualPage {
             temp = data;
             this.cart.push({
                name: temp.name,
-               price: temp.price
+               price: temp.price,
+               comment: ""
             });
-            this.totalPrice += temp.price;
+            this.totalPrice += temp.price/100;
             this.getItemsById(i+1, callback);
         });
     } else {
@@ -82,24 +83,45 @@ export class PedidoActualPage {
     }
   }
 
-  deleteItem(item) {
-      let index = 0;
-      for (var i = 0; i < this.cart.length; i++) {
-          if (this.cart[i].name == item){
-              index = i;
-              break;
-          }
-      }
+  deleteItem(index) {
       this.userService.deleteFromCart(this.cartID[index]).then((data) => {
-          this.totalPrice = 0;
+          this.totalPrice -= (this.cart[index].price/100);
+          this.cart.splice(index, 1);
           this.cartID = data;
-          this.cart = [];
-          this.getItemsById(0, function(){});
       });
   }
 
   goToPago(params){
      this.confirmAlert();
+  }
+
+  addComment(index) {
+    let prompt = this.alertCtrl.create({
+        title: "Agregar comentario.",
+        message: "Agregue un comentario si desea cambiar algo en su plato.",
+        inputs: [
+            {
+                name: 'comment',
+                placeholder: 'Comentario',
+                value: this.cart[index].comment
+            }
+
+        ],
+        buttons: [
+            {
+                text: 'Cancelar',
+                role: 'cancel'
+            },
+            {
+                text: 'Guardar',
+                handler: data => {
+                    this.cart[index].comment = data.comment;
+                    alert(this.cart[index].comment);
+                }
+            }
+        ]
+    });
+    prompt.present();
   }
 
 

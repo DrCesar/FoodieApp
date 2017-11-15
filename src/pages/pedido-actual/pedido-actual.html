@@ -11,20 +11,20 @@
 <ion-content padding id="page6" style="background-color:#FFFFFF;">
   <h3 id="pedidoActual-heading2" style="color:#000000;"></h3>
   <ion-list id="pedidoActual-list2">
-    <ion-item-sliding *ngFor="let item of cart">
+    <ion-item-sliding *ngFor="let item of cart; let i = index">
       <ion-item color="none" id="pedidoActual-list-item12">
           {{item.name}}
         <ion-note item-right>
-          Q.{{item.price}}.00
+          Q.{{(item.price/100).toFixed(2)}}
         </ion-note>
         <ion-icon name="arrow-forward" item-left></ion-icon>
         <p>Arrastrar a la derecha para opciones</p>
       </ion-item>
       <ion-item-options side="left">
-        <button ion-button color="danger" on-tap="deleteItem(item.name)">
+        <button ion-button color="danger" on-tap="deleteItem(i)">
           Eliminar
         </button>
-        <button ion-button color="energized">
+        <button ion-button color="energized" on-tap="addComment(i)">
           Comentarios
         </button>
       </ion-item-options>
@@ -32,9 +32,9 @@
   </ion-list>
   <div id="pedidoActual-markdown6" class="show-list-numbers-and-dots">
     <p style="color:#000000;">
-      Su total:
+      Su total: 
       <strong>
-        Q.{{totalPrice}}.00
+        Q.{{totalPrice.toFixed(2)}}
       </strong>
     </p>
   </div>

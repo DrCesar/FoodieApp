@@ -16,7 +16,7 @@
               {{plato.name}}
             </h2>
         <ion-note item-right>
-          Q.{{plato.price}}.00
+          Q.{{(plato.price/100).toFixed(2)}}
         </ion-note>
         <ion-icon name="arrow-forward" item-left></ion-icon>
         <p>Arrastrar a la derecha para agregar a mi pedido</p>
