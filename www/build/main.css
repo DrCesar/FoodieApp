@@ -25529,3 +25529,7 @@ ion-navbar.toolbar {
   -ms-flex-align: auto;
   align-items: auto;
 }
+
+page-restaurantes-cercanos #map {
+  height: 60%;
+}

@@ -32,6 +32,20 @@ export class UserProvider {
 
 	}
 
+	getOrders() {
+
+		return new Promise(resolve => {
+
+			this.http.get(this.url + '/api/order/user/' + this.userID)
+				.map(res => res.json())
+				.subscribe(data => {
+                    this.data = data;
+                    resolve(this.data);
+                });
+                
+		});
+	}
+
 	addToCart(item) {
 		let cartData = {
 			userID: this.userID,

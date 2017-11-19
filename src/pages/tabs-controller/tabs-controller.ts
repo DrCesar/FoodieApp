@@ -5,6 +5,7 @@ import { CategorAsPage } from '../categor-as/categor-as';
 import { PlatosPage } from '../platos/platos';
 import { PedidoActualPage } from '../pedido-actual/pedido-actual';
 import { RestaurantesCercanosPage } from '../restaurantes-cercanos/restaurantes-cercanos';
+import { ViewordersPage } from '../vieworders/vieworders';
 import { PagoPage } from '../pago/pago';
 
 @Component({
@@ -16,7 +17,7 @@ export class TabsControllerPage {
   tab1Root: any = InicioPage;
   tab2Root: any = PedidoActualPage;
   tab3Root: any = RestaurantesCercanosPage;
-  tab4Root: any = PagoPage;
+  tab4Root: any = ViewordersPage;
   constructor(public navCtrl: NavController) {
   }
   goToInicio(params){
@@ -37,5 +38,8 @@ export class TabsControllerPage {
   }goToPago(params){
     if (!params) params = {};
     this.navCtrl.push(PagoPage);
+  }goToViewOrders(params) {
+    if (!params) params = {};
+    this.navCtrl.push(ViewordersPage);
   }
 }

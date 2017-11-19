@@ -9,8 +9,6 @@ import { UserProvider } from '../../providers/user/users';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
-@IonicPage()
 @Component({
   selector: 'page-vieworders',
   templateUrl: 'vieworders.html',
