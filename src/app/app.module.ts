@@ -19,6 +19,7 @@ import { ResultadosDeBSquedaPage } from '../pages/resultados-de-bsqueda/resultad
 import { PlatoPage } from '../pages/plato/plato';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { PagoPage } from '../pages/pago/pago';
+import { ViewordersPage } from '../pages/vieworders/vieworders';
 import { HttpModule } from '@angular/http';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -46,7 +47,8 @@ import { OrderProvider } from '../providers/user/order';
     ResultadosDeBSquedaPage,
     PlatoPage,
     PerfilPage,
-    PagoPage
+    PagoPage,
+    ViewordersPage
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,8 @@ import { OrderProvider } from '../providers/user/order';
     ResultadosDeBSquedaPage,
     PlatoPage,
     PerfilPage,
-    PagoPage
+    PagoPage,
+    ViewordersPage
   ],
   providers: [
     StatusBar,
