@@ -7,6 +7,7 @@ export class UserProvider {
 
 	url: any;
 	data: any;
+	user: any;
 	userID: any;
 
 	constructor(public http: Http) {
@@ -27,6 +28,44 @@ export class UserProvider {
 		})
 	}
 
+	searchUser(username) {
+		return new Promise(resolve => {
+			this.http.get(this.url + '/api/user/search/' + username)
+				.map(res => res.json())
+				.subscribe(data => {
+					this.data = data;
+					resolve(this.data);
+				})
+		});
+	}
+
+	searchUserID(userID) {
+		
+		return new Promise(resolve => {
+			this.http.get(this.url + '/api/user/' + userID)
+			 	.map(res => res.json())
+			 	.subscribe(data => {
+			 		this.data = data;
+			 		resolve(this.data);
+			 	})
+		})
+	}
+
+	addFriend(friendID) {
+
+		let headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+
+		return new Promise(resolve => {
+			this.http.post(this.url + '/api/user/addFriend/' + this.userID + '/' + friendID, {headers: headers})
+				.map(res => res.json())
+				.subscribe(data => {
+					this.data = data;
+					resolve(data);
+				});
+		});
+	}
+
 	postOrder(order) {
 
 		let headers = new Headers();
@@ -37,7 +76,7 @@ export class UserProvider {
 			this.http.post(this.url + '/api/order', JSON.stringify(order), {headers: headers})
 			.map(res => res.json())
 			.subscribe(data => {
-				this.data = data
+				this.data = data;
 				alert(data.message);
 				resolve(this.data);
 			});
@@ -126,6 +165,7 @@ export class UserProvider {
 		return this.http.post(this.url + '/users/signin', JSON.stringify(user), {headers: headers})
 			.map(res => {
 				this.userID = res.json().userID;
+				this.user = res.json();
 				return res;
 			});
 	}

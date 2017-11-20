@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { UserProvider } from '../../providers/user/users';
 
 /**
  * Generated class for the BuscarUsuariosPage page.
@@ -15,11 +16,43 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class BuscarUsuariosPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+	username: any;
+	results: any;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad BuscarUsuariosPage');
-  }
+	constructor(private userService: UserProvider, private alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
+	}
+
+	ionViewDidLoad() {
+	console.log('ionViewDidLoad BuscarUsuariosPage');
+	}
+
+	searchUsers() {
+		if (this.username != '')
+			this.userService.searchUser(this.username).then(data => {
+				this.results = data;
+			});
+		else
+			this.alert();
+	}
+
+	viewUser(user) {
+
+	}
+
+	addUser(user) {
+		if (user)
+			this.userService.addFriend(user._id).then(data => {
+				console.log(data);
+			})
+	}
+
+	alert() {
+		let alert = this.alertCtrl.create({
+			title: 'Error',
+			subTitle: 'Usuario ingresado es inválido.',
+			buttons: ['OK']
+		});
+		alert.present();
+	}
 
 }

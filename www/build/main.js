@@ -1,13 +1,13 @@
 webpackJsonp([2],{
 
-/***/ 107:
+/***/ 108:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RecuperarContraseAPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__inicio_inicio__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__categor_as_categor_as__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__platos_platos__ = __webpack_require__(33);
@@ -210,6 +210,7 @@ PedidoAnteriorPage = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BuscarUsuariosPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_user_users__ = __webpack_require__(25);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -221,6 +222,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 /**
  * Generated class for the BuscarUsuariosPage page.
  *
@@ -228,23 +230,51 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var BuscarUsuariosPage = (function () {
-    function BuscarUsuariosPage(navCtrl, navParams) {
+    function BuscarUsuariosPage(userService, alertCtrl, navCtrl, navParams) {
+        this.userService = userService;
+        this.alertCtrl = alertCtrl;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
     }
     BuscarUsuariosPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad BuscarUsuariosPage');
     };
+    BuscarUsuariosPage.prototype.searchUsers = function () {
+        var _this = this;
+        if (this.username != '')
+            this.userService.searchUser(this.username).then(function (data) {
+                _this.results = data;
+            });
+        else
+            this.alert();
+    };
+    BuscarUsuariosPage.prototype.viewUser = function (user) {
+    };
+    BuscarUsuariosPage.prototype.addUser = function (user) {
+        if (user)
+            this.userService.addFriend(user._id).then(function (data) {
+                console.log(data);
+            });
+    };
+    BuscarUsuariosPage.prototype.alert = function () {
+        var alert = this.alertCtrl.create({
+            title: 'Error',
+            subTitle: 'Usuario ingresado es inválido.',
+            buttons: ['OK']
+        });
+        alert.present();
+    };
     return BuscarUsuariosPage;
 }());
 BuscarUsuariosPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-buscar-usuarios',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\buscar-usuarios\buscar-usuarios.html"*/'<!--\n\n  Generated template for the BuscarUsuariosPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>BuscarUsuarios</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\buscar-usuarios\buscar-usuarios.html"*/,
+        selector: 'page-buscar-usuarios',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\buscar-usuarios\buscar-usuarios.html"*/'<!--\n\n  Generated template for the BuscarUsuariosPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n	<ion-navbar>\n\n		<ion-title>BuscarUsuarios</ion-title>\n\n	</ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n	<ion-item id="login-input1">\n\n		<ion-label></ion-label>\n\n		<ion-input type="text"  [(ngModel)]="username"  name="something" placeholder="Usuario"></ion-input>\n\n	</ion-item>\n\n\n\n	<button ion-button color="secondary" block small on-click="searchUsers()">Buscar</button>\n\n\n\n    <ion-item *ngFor="let user of results">\n\n     	<ion-item>\n\n	          <ion-row>\n\n	            <ion-col>\n\n	              <ion-avatar item-start>\n\n	                <img src="assets/img/Users-User-Male-2-icon.png">\n\n	              </ion-avatar>\n\n	            </ion-col>\n\n	            <ion-col text-right>\n\n	              <button ion-button icon-left clear on-click="addUser(user)">\n\n	                <ion-icon name="checkmark-circle"></ion-icon><div>Agregar</div>\n\n	              </button>\n\n	            </ion-col>\n\n	          </ion-row>\n\n	          <h2>{{user.firstName}} {{user.lastName}}</h2>\n\n	          <p>{{user.username}}</p>\n\n	    </ion-item>\n\n    </ion-item> \n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\buscar-usuarios\buscar-usuarios.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_user_users__["a" /* UserProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_user_users__["a" /* UserProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _d || Object])
 ], BuscarUsuariosPage);
 
+var _a, _b, _c, _d;
 //# sourceMappingURL=buscar-usuarios.js.map
 
 /***/ }),
@@ -302,7 +332,7 @@ module.exports = webpackAsyncContext;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PedidoActualPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_user_users__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_user_users__ = __webpack_require__(25);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -534,7 +564,7 @@ RestaurantesCercanosPage = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewordersPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_user_users__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_user_users__ = __webpack_require__(25);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -719,7 +749,7 @@ PedidosRecientesPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tabs_controller_tabs_controller__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_user_users__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_user_users__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__buscar_usuarios_buscar_usuarios__ = __webpack_require__(112);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -740,16 +770,24 @@ var PerfilPage = (function () {
         this.userService = userService;
         this.navCtrl = navCtrl;
     }
-    PerfilPage.prototype.ionViewDidLoad = function () {
+    PerfilPage.prototype.ionViewDidEnter = function () {
         var _this = this;
-        console.log('queonda');
         this.userService.getUser().then(function (data) {
             _this.user = data;
-            console.log(data);
+            _this.friends = [];
+            console.log(data['friends'].length);
+            for (var i = 0; i < data['friends'].length; i++) {
+                console.log(data['friends'][i]);
+                _this.userService.searchUserID(data['friends'][i]).then(function (user) {
+                    _this.friends.push(user);
+                });
+            }
         });
     };
     PerfilPage.prototype.addFriend = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__buscar_usuarios_buscar_usuarios__["a" /* BuscarUsuariosPage */]);
+    };
+    PerfilPage.prototype.viewUser = function (user) {
     };
     PerfilPage.prototype.regresar = function (params) {
         if (!params)
@@ -760,11 +798,12 @@ var PerfilPage = (function () {
 }());
 PerfilPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-perfil',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\perfil\perfil.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>\n\n      Perfil\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page20" style="background-color:#E44045;">\n\n\n\n  <ion-card>\n\n    <img src="assets/img/profilepic.jpg" style="display:block;width:15%;height:auto;margin-left:auto;margin-right:auto;"/>\n\n    <div></div>\n\n    <ion-item>\n\n      <h2></h2>\n\n      <h2></h2>\n\n    </ion-item>\n\n  </ion-card>\n\n  <ion-card>\n\n    <ion-row>\n\n      <ion-col text-left><h2>Amigos</h2></ion-col>\n\n      <ion-col text-right>\n\n        <button ion-button clear on-click="addFriend()">\n\n          <ion-icon name="add-circle"></ion-icon><div> Agregar Amigos</div>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n   <!--  <ion-item *ngFor="let friend of friends" on-tap="viewProfile(friend)">\n\n\n\n    </ion-item> -->\n\n  </ion-card>\n\n\n\n\n\n  <!-- <form id="perfil-form7">\n\n    <div id="perfil-markdown11" class="show-list-numbers-and-dots">\n\n      <p style="color:#000000;">\n\n        Nombre de usuario\n\n      </p>\n\n    </div>\n\n    <ion-item id="perfil-input12">\n\n      <ion-input type="text" placeholder=""></ion-input>\n\n    </ion-item>\n\n    <div id="perfil-markdown12" class="show-list-numbers-and-dots">\n\n      <p style="color:#000000;">\n\n        Correo Electrónico\n\n      </p>\n\n    </div>\n\n    <ion-item id="perfil-input13">\n\n      \n\n      <ion-input type="text" placeholder=""></ion-input>\n\n    </ion-item>\n\n    <div id="perfil-markdown10" class="show-list-numbers-and-dots">\n\n      <p style="color:#000000;">\n\n        Contraseña\n\n      </p>\n\n    </div>\n\n    <ion-item id="perfil-input14">\n\n      <ion-input type="password" placeholder=""></ion-input>\n\n    </ion-item>\n\n    <div id="perfil-markdown10" class="show-list-numbers-and-dots">\n\n      <p style="color:#000000;">\n\n        Confirmar Contraseña\n\n      </p>\n\n    </div>\n\n    <ion-item id="perfil-input14">\n\n      <ion-input type="password" placeholder=""></ion-input>\n\n    </ion-item>\n\n  </form>\n\n  <div class="spacer" style="width:300px;height:18px;" id="pedidosRecientes-spacer4"></div>\n\n  <button id="pedidosRecientes-button17" ion-button color="assertive" icon-left style="color:#FFFFFF;" on-click="regresar();">\n\n    Confirmar datos\n\n  </button> -->\n\n</ion-content>'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\perfil\perfil.html"*/
+        selector: 'page-perfil',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\perfil\perfil.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>\n\n      Perfil\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page20" style="background-color:#E44045;">\n\n\n\n  <ion-card>\n\n    <img src="assets/img/Users-User-Male-2-icon.png" style="display:block;width:15%;height:auto;margin-left:auto;margin-right:auto;"/>\n\n    <div></div>\n\n    <ion-item text-center *ngIf="!!user">\n\n      <ion-card-title>{{user.firstName}} {{user.lastName}}</ion-card-title>\n\n      <h2>{{user.username}}</h2>\n\n    </ion-item>\n\n  </ion-card>\n\n  <ion-card>\n\n    <ion-row>\n\n      <ion-col text-left><ion-card-title style="padding-right:10%;">Amigos</ion-card-title></ion-col>\n\n      <ion-col text-right>\n\n        <button ion-button icon-left clear on-click="addFriend()">\n\n          <ion-icon name="add-circle"></ion-icon><div> Agregar Amigos</div>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n   <!--  <ion-item *ngFor="let friend of friends" on-tap="viewProfile(friend)">\n\n\n\n    </ion-item> -->\n\n  </ion-card>\n\n\n\n   <ion-item *ngFor="let friend of friends">\n\n      <ion-item>\n\n            <ion-row>\n\n              <ion-col>\n\n                <ion-avatar item-start>\n\n                  <img src="assets/img/Users-User-Male-2-icon.png">\n\n                </ion-avatar>\n\n              </ion-col>\n\n              <ion-col text-right>\n\n                <button ion-button icon-left clear on-click="viewUser(friend)"><div>Ver Perfil</div>\n\n                </button>\n\n              </ion-col>\n\n            </ion-row>\n\n            <h2>{{friend.firstName}} {{friend.lastName}}</h2>\n\n            <p>{{friend.username}}</p>\n\n      </ion-item>\n\n    </ion-item>\n\n\n\n\n\n  <!-- <form id="perfil-form7">\n\n    <div id="perfil-markdown11" class="show-list-numbers-and-dots">\n\n      <p style="color:#000000;">\n\n        Nombre de usuario\n\n      </p>\n\n    </div>\n\n    <ion-item id="perfil-input12">\n\n      <ion-input type="text" placeholder=""></ion-input>\n\n    </ion-item>\n\n    <div id="perfil-markdown12" class="show-list-numbers-and-dots">\n\n      <p style="color:#000000;">\n\n        Correo Electrónico\n\n      </p>\n\n    </div>\n\n    <ion-item id="perfil-input13">\n\n      \n\n      <ion-input type="text" placeholder=""></ion-input>\n\n    </ion-item>\n\n    <div id="perfil-markdown10" class="show-list-numbers-and-dots">\n\n      <p style="color:#000000;">\n\n        Contraseña\n\n      </p>\n\n    </div>\n\n    <ion-item id="perfil-input14">\n\n      <ion-input type="password" placeholder=""></ion-input>\n\n    </ion-item>\n\n    <div id="perfil-markdown10" class="show-list-numbers-and-dots">\n\n      <p style="color:#000000;">\n\n        Confirmar Contraseña\n\n      </p>\n\n    </div>\n\n    <ion-item id="perfil-input14">\n\n      <ion-input type="password" placeholder=""></ion-input>\n\n    </ion-item>\n\n  </form>\n\n  <div class="spacer" style="width:300px;height:18px;" id="pedidosRecientes-spacer4"></div>\n\n  <button id="pedidosRecientes-button17" ion-button color="assertive" icon-left style="color:#FFFFFF;" on-click="regresar();">\n\n    Confirmar datos\n\n  </button> -->\n\n</ion-content>'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\perfil\perfil.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__providers_user_users__["a" /* UserProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__providers_user_users__["a" /* UserProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_user_users__["a" /* UserProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _b || Object])
 ], PerfilPage);
 
+var _a, _b;
 //# sourceMappingURL=perfil.js.map
 
 /***/ }),
@@ -789,7 +828,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(273);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_tabs_controller_tabs_controller__ = __webpack_require__(34);
@@ -801,21 +840,21 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_pedidos_recientes_pedidos_recientes__ = __webpack_require__(212);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_platos_platos__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_restaurantes_restaurantes__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_login_login__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_login_login__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_crear_nueva_cuenta_crear_nueva_cuenta__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_acerca_de_foodie_acerca_de_foodie__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_recuperar_contrase_a_recuperar_contrase_a__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_recuperar_contrase_a_recuperar_contrase_a__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_resultados_de_bsqueda_resultados_de_bsqueda__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_plato_plato__ = __webpack_require__(282);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_perfil_perfil__ = __webpack_require__(213);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_pago_pago__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_vieworders_vieworders__ = __webpack_require__(209);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_buscar_usuarios_buscar_usuarios__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__angular_http__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__angular_http__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_status_bar__ = __webpack_require__(203);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_splash_screen__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__providers_information_information__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__providers_user_users__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__providers_user_users__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__providers_user_order__ = __webpack_require__(283);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -929,6 +968,183 @@ AppModule = __decorate([
 
 /***/ }),
 
+/***/ 25:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var UserProvider = (function () {
+    function UserProvider(http) {
+        this.http = http;
+        this.url = "http://localhost:8080";
+        this.data = null;
+    }
+    UserProvider.prototype.getUser = function () {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.http.get(_this.url + '/api/user/' + _this.userID)
+                .map(function (res) { return res.json(); })
+                .subscribe(function (data) {
+                _this.data = data;
+                resolve(_this.data);
+            });
+        });
+    };
+    UserProvider.prototype.searchUser = function (username) {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.http.get(_this.url + '/api/user/search/' + username)
+                .map(function (res) { return res.json(); })
+                .subscribe(function (data) {
+                _this.data = data;
+                resolve(_this.data);
+            });
+        });
+    };
+    UserProvider.prototype.searchUserID = function (userID) {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.http.get(_this.url + '/api/user/' + userID)
+                .map(function (res) { return res.json(); })
+                .subscribe(function (data) {
+                _this.data = data;
+                resolve(_this.data);
+            });
+        });
+    };
+    UserProvider.prototype.addFriend = function (friendID) {
+        var _this = this;
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+        headers.append('Content-Type', 'application/json');
+        return new Promise(function (resolve) {
+            _this.http.post(_this.url + '/api/user/addFriend/' + _this.userID + '/' + friendID, { headers: headers })
+                .map(function (res) { return res.json(); })
+                .subscribe(function (data) {
+                _this.data = data;
+                resolve(data);
+            });
+        });
+    };
+    UserProvider.prototype.postOrder = function (order) {
+        var _this = this;
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+        headers.append('Content-Type', 'application/json');
+        order.owner = this.userID;
+        return new Promise(function (resolve) {
+            _this.http.post(_this.url + '/api/order', JSON.stringify(order), { headers: headers })
+                .map(function (res) { return res.json(); })
+                .subscribe(function (data) {
+                _this.data = data;
+                alert(data.message);
+                resolve(_this.data);
+            });
+        });
+    };
+    UserProvider.prototype.getOrders = function () {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.http.get(_this.url + '/api/order/user/' + _this.userID)
+                .map(function (res) { return res.json(); })
+                .subscribe(function (data) {
+                _this.data = data;
+                resolve(_this.data);
+            });
+        });
+    };
+    UserProvider.prototype.addToCart = function (item) {
+        var cartData = {
+            userID: this.userID,
+            itemID: item
+        };
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+        headers.append('Content-Type', 'application/json');
+        this.http.post(this.url + '/api/user/cart', JSON.stringify(cartData), { headers: headers })
+            .subscribe(function (res) {
+            console.log(res.json());
+        });
+    };
+    UserProvider.prototype.getCartByUser = function () {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.http.get(_this.url + '/api/user/cart/' + _this.userID)
+                .map(function (res) { return res.json(); })
+                .subscribe(function (data) {
+                _this.data = data;
+                resolve(_this.data);
+            });
+        });
+    };
+    UserProvider.prototype.deleteFromCart = function (item) {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.http.get(_this.url + '/api/user/cart/delete/' + _this.userID + '/' + item)
+                .map(function (res) { return res.json(); })
+                .subscribe(function (data) {
+                _this.data = data;
+                resolve(_this.data);
+            });
+        });
+    };
+    UserProvider.prototype.getItemById = function (id) {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.http.get(_this.url + '/api/menu/item/' + id)
+                .map(function (res) { return res.json(); })
+                .subscribe(function (data) {
+                _this.data = data;
+                resolve(_this.data);
+            });
+        });
+    };
+    UserProvider.prototype.signup = function (user) {
+        var _this = this;
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(this.url + '/users/signup', JSON.stringify(user), { headers: headers })
+            .map(function (res) {
+            _this.userID = res.json().userID;
+            return res;
+        });
+    };
+    UserProvider.prototype.signin = function (user) {
+        var _this = this;
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(this.url + '/users/signin', JSON.stringify(user), { headers: headers })
+            .map(function (res) {
+            _this.userID = res.json().userID;
+            _this.user = res.json();
+            return res;
+        });
+    };
+    return UserProvider;
+}());
+UserProvider = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
+], UserProvider);
+
+var _a;
+//# sourceMappingURL=users.js.map
+
+/***/ }),
+
 /***/ 273:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -938,8 +1154,8 @@ AppModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(203);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_recuperar_contrase_a_recuperar_contrase_a__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_recuperar_contrase_a_recuperar_contrase_a__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_inicio_inicio__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_categor_as_categor_as__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_platos_platos__ = __webpack_require__(33);
@@ -1068,146 +1284,6 @@ MyApp = __decorate([
 
 /***/ }),
 
-/***/ 28:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var UserProvider = (function () {
-    function UserProvider(http) {
-        this.http = http;
-        this.url = "http://localhost:8080";
-        this.data = null;
-    }
-    UserProvider.prototype.getUser = function () {
-        var _this = this;
-        return new Promise(function (resolve) {
-            _this.http.get(_this.url + '/api/user/' + _this.userID)
-                .map(function (res) { return res.json(); })
-                .subscribe(function (data) {
-                _this.data = data;
-                resolve(_this.data);
-            });
-        });
-    };
-    UserProvider.prototype.postOrder = function (order) {
-        var _this = this;
-        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
-        headers.append('Content-Type', 'application/json');
-        order.owner = this.userID;
-        return new Promise(function (resolve) {
-            _this.http.post(_this.url + '/api/order', JSON.stringify(order), { headers: headers })
-                .map(function (res) { return res.json(); })
-                .subscribe(function (data) {
-                _this.data = data;
-                alert(data.message);
-                resolve(_this.data);
-            });
-        });
-    };
-    UserProvider.prototype.getOrders = function () {
-        var _this = this;
-        return new Promise(function (resolve) {
-            _this.http.get(_this.url + '/api/order/user/' + _this.userID)
-                .map(function (res) { return res.json(); })
-                .subscribe(function (data) {
-                _this.data = data;
-                resolve(_this.data);
-            });
-        });
-    };
-    UserProvider.prototype.addToCart = function (item) {
-        var cartData = {
-            userID: this.userID,
-            itemID: item
-        };
-        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
-        headers.append('Content-Type', 'application/json');
-        this.http.post(this.url + '/api/user/cart', JSON.stringify(cartData), { headers: headers })
-            .subscribe(function (res) {
-            console.log(res.json());
-        });
-    };
-    UserProvider.prototype.getCartByUser = function () {
-        var _this = this;
-        return new Promise(function (resolve) {
-            _this.http.get(_this.url + '/api/user/cart/' + _this.userID)
-                .map(function (res) { return res.json(); })
-                .subscribe(function (data) {
-                _this.data = data;
-                resolve(_this.data);
-            });
-        });
-    };
-    UserProvider.prototype.deleteFromCart = function (item) {
-        var _this = this;
-        return new Promise(function (resolve) {
-            _this.http.get(_this.url + '/api/user/cart/delete/' + _this.userID + '/' + item)
-                .map(function (res) { return res.json(); })
-                .subscribe(function (data) {
-                _this.data = data;
-                resolve(_this.data);
-            });
-        });
-    };
-    UserProvider.prototype.getItemById = function (id) {
-        var _this = this;
-        return new Promise(function (resolve) {
-            _this.http.get(_this.url + '/api/menu/item/' + id)
-                .map(function (res) { return res.json(); })
-                .subscribe(function (data) {
-                _this.data = data;
-                resolve(_this.data);
-            });
-        });
-    };
-    UserProvider.prototype.signup = function (user) {
-        var _this = this;
-        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
-        headers.append('Content-Type', 'application/json');
-        return this.http.post(this.url + '/users/signup', JSON.stringify(user), { headers: headers })
-            .map(function (res) {
-            _this.userID = res.json().userID;
-            return res;
-        });
-    };
-    UserProvider.prototype.signin = function (user) {
-        var _this = this;
-        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
-        headers.append('Content-Type', 'application/json');
-        return this.http.post(this.url + '/users/signin', JSON.stringify(user), { headers: headers })
-            .map(function (res) {
-            _this.userID = res.json().userID;
-            return res;
-        });
-    };
-    return UserProvider;
-}());
-UserProvider = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
-], UserProvider);
-
-//# sourceMappingURL=users.js.map
-
-/***/ }),
-
 /***/ 282:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1249,8 +1325,8 @@ PlatoPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OrderProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1357,7 +1433,7 @@ CategorAsPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_information_information__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_user_users__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_user_users__ = __webpack_require__(25);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1502,8 +1578,8 @@ TabsControllerPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InformationProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1578,15 +1654,15 @@ InformationProvider = __decorate([
 
 /***/ }),
 
-/***/ 54:
+/***/ 55:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_user_users__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__recuperar_contrase_a_recuperar_contrase_a__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_user_users__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__recuperar_contrase_a_recuperar_contrase_a__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__categor_as_categor_as__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__platos_platos__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__crear_nueva_cuenta_crear_nueva_cuenta__ = __webpack_require__(56);
@@ -1720,8 +1796,8 @@ var LoginPage_1;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CrearNuevaCuentaPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_user_users__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_user_users__ = __webpack_require__(25);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
