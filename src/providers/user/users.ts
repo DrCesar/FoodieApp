@@ -28,6 +28,81 @@ export class UserProvider {
 		})
 	}
 
+	 searchUser(username) {
+ 
+    return new Promise(resolve => {
+ 
+      this.http.get(this.url + '/api/user/search/' + username)
+ 
+        .map(res => res.json())
+ 
+        .subscribe(data => {
+ 
+          this.data = data;
+ 
+          resolve(this.data);
+ 
+        })
+ 
+    });
+ 
+  }
+ 
+
+ 
+  searchUserID(userID) {
+ 
+    
+ 
+    return new Promise(resolve => {
+ 
+      this.http.get(this.url + '/api/user/' + userID)
+ 
+         .map(res => res.json())
+ 
+         .subscribe(data => {
+ 
+           this.data = data;
+ 
+           resolve(this.data);
+ 
+         })
+ 
+    })
+ 
+  }
+ 
+
+ 
+  addFriend(friendID) {
+ 
+
+ 
+    let headers = new Headers();
+ 
+    headers.append('Content-Type', 'application/json');
+ 
+
+ 
+    return new Promise(resolve => {
+ 
+      this.http.post(this.url + '/api/user/addFriend/' + this.userID + '/' + friendID, {headers: headers})
+ 
+        .map(res => res.json())
+ 
+        .subscribe(data => {
+ 
+          this.data = data;
+ 
+          resolve(data);
+ 
+        });
+ 
+    });
+ 
+  }
+ 
+
 	postOrder(order) {
 		order.restaurant = this.currentRestaurant;
 

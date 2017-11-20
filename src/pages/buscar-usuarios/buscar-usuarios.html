@@ -12,7 +12,32 @@
 
 </ion-header>
 
-
-<ion-content padding>
+<ion-content padding> 
+ 
+  <ion-item id="login-input1"> 
+    <ion-label></ion-label> 
+    <ion-input type="text"  [(ngModel)]="username"  name="something" placeholder="Usuario"></ion-input> 
+  </ion-item> 
+ 
+  <button ion-button color="secondary" block small on-click="searchUsers()">Buscar</button> 
+ 
+    <ion-item *ngFor="let user of results"> 
+       <ion-item> 
+            <ion-row> 
+              <ion-col> 
+                <ion-avatar item-start> 
+                  <img src="assets/img/Users-User-Male-2-icon.png"> 
+                </ion-avatar> 
+              </ion-col> 
+              <ion-col text-right> 
+                <button ion-button icon-left clear on-click="addUser(user)"> 
+                  <ion-icon name="checkmark-circle"></ion-icon><div>Agregar</div> 
+                </button> 
+              </ion-col> 
+            </ion-row> 
+            <h2>{{user.firstName}} {{user.lastName}}</h2> 
+            <p>{{user.username}}</p> 
+      </ion-item> 
+    </ion-item>  
 
 </ion-content>

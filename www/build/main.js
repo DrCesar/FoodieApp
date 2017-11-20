@@ -236,9 +236,6 @@ var BuscarUsuariosPage = (function () {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
     }
-    BuscarUsuariosPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad BuscarUsuariosPage');
-    };
     BuscarUsuariosPage.prototype.searchUsers = function () {
         var _this = this;
         if (this.username != '')
@@ -269,12 +266,11 @@ var BuscarUsuariosPage = (function () {
 BuscarUsuariosPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-buscar-usuarios',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\buscar-usuarios\buscar-usuarios.html"*/'<!--\n\n  Generated template for the BuscarUsuariosPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>BuscarUsuarios</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\buscar-usuarios\buscar-usuarios.html"*/,
+        selector: 'page-buscar-usuarios',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\buscar-usuarios\buscar-usuarios.html"*/'<!--\n\n  Generated template for the BuscarUsuariosPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>BuscarUsuarios</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding> \n\n \n\n  <ion-item id="login-input1"> \n\n    <ion-label></ion-label> \n\n    <ion-input type="text"  [(ngModel)]="username"  name="something" placeholder="Usuario"></ion-input> \n\n  </ion-item> \n\n \n\n  <button ion-button color="secondary" block small on-click="searchUsers()">Buscar</button> \n\n \n\n    <ion-item *ngFor="let user of results"> \n\n       <ion-item> \n\n            <ion-row> \n\n              <ion-col> \n\n                <ion-avatar item-start> \n\n                  <img src="assets/img/Users-User-Male-2-icon.png"> \n\n                </ion-avatar> \n\n              </ion-col> \n\n              <ion-col text-right> \n\n                <button ion-button icon-left clear on-click="addUser(user)"> \n\n                  <ion-icon name="checkmark-circle"></ion-icon><div>Agregar</div> \n\n                </button> \n\n              </ion-col> \n\n            </ion-row> \n\n            <h2>{{user.firstName}} {{user.lastName}}</h2> \n\n            <p>{{user.username}}</p> \n\n      </ion-item> \n\n    </ion-item>  \n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\buscar-usuarios\buscar-usuarios.html"*/,
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_user_users__["a" /* UserProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_user_users__["a" /* UserProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_user_users__["a" /* UserProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]])
 ], BuscarUsuariosPage);
 
-var _a, _b, _c, _d;
 //# sourceMappingURL=buscar-usuarios.js.map
 
 /***/ }),
@@ -301,11 +297,11 @@ webpackEmptyAsyncContext.id = 121;
 
 var map = {
 	"../pages/buscar-usuarios/buscar-usuarios.module": [
-		284,
+		285,
 		1
 	],
 	"../pages/upload/upload.module": [
-		285,
+		286,
 		0
 	]
 };
@@ -485,11 +481,18 @@ var PedidoActualPage = (function () {
     };
     PedidoActualPage.prototype.postOrder = function () {
         var _this = this;
-        this.order.items = this.cart;
-        this.order.restaurant = "LinLin";
-        this.userService.postOrder(this.order).then(function (data) {
-            _this.navCtrl.parent.select(0);
-        });
+        if (this.cart.length > 0) {
+            this.order.items = this.cart;
+            this.userService.postOrder(this.order).then(function (data) {
+                _this.navCtrl.parent.select(0);
+                _this.deleteAll();
+                var alert = _this.alertCtrl.create({
+                    title: "Orden creada con éxito!",
+                    buttons: ['OK']
+                });
+                alert.present();
+            });
+        }
     };
     return PedidoActualPage;
 }());
@@ -514,7 +517,6 @@ PedidoActualPage = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RestaurantesCercanosPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__categor_as_categor_as__ = __webpack_require__(32);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -526,7 +528,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
 var RestaurantesCercanosPage = (function () {
     function RestaurantesCercanosPage(navCtrl) {
         this.navCtrl = navCtrl;
@@ -535,83 +536,26 @@ var RestaurantesCercanosPage = (function () {
         this.showMap();
     };
     RestaurantesCercanosPage.prototype.showMap = function () {
-        var _this = this;
-        var image = 'https://www.pcmag.com/img/no-author-icon.svg';
         var location = new google.maps.LatLng(14.604610, -90.488846);
-        var location1 = new google.maps.LatLng(14.603997, -90.488376);
-        var location2 = new google.maps.LatLng(14.608441, -90.486660);
-        var location3 = new google.maps.LatLng(14.595465, -90.495898);
         var options = {
             center: location,
-            mapTypeControl: false,
-            streetViewControl: false,
             zoom: 16
         };
         this.map = new google.maps.Map(this.mapRef.nativeElement, options);
-        var marker = new google.maps.Marker({
-            map: this.map,
-            position: location,
-            title: "Esta es tu posición",
-            icon: image,
-            clickable: true
-        });
-        var marker1 = new google.maps.Marker({
-            map: this.map,
-            position: location1,
-            title: "LinLin",
-            clickable: true
-        });
-        var infowindow1 = new google.maps.InfoWindow({
-            content: "LinLin"
-        });
-        var marker2 = new google.maps.Marker({
-            map: this.map,
-            position: location2,
-            title: "L'albero",
-            clickable: true
-        });
-        var infowindow2 = new google.maps.InfoWindow({
-            content: "L'albero"
-        });
-        var marker3 = new google.maps.Marker({
-            map: this.map,
-            position: location3,
-            title: "Tacostumbras",
-            clickable: true
-        });
-        var infowindow3 = new google.maps.InfoWindow({
-            content: "Tacostumbras"
-        });
-        marker1.addListener('click', function () {
-            var data = { restaurant: 'LinLin' };
-            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__categor_as_categor_as__["a" /* CategorAsPage */], data);
-        });
-        infowindow1.open(this.map, marker1);
-        marker2.addListener('click', function () {
-            var data = { restaurant: "L'albero" };
-            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__categor_as_categor_as__["a" /* CategorAsPage */], data);
-        });
-        infowindow2.open(this.map, marker2);
-        marker3.addListener('click', function () {
-            var data = { restaurant: 'Tacostumbras' };
-            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__categor_as_categor_as__["a" /* CategorAsPage */], data);
-        });
-        infowindow3.open(this.map, marker3);
     };
     return RestaurantesCercanosPage;
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])('map'),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */]) === "function" && _a || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */])
 ], RestaurantesCercanosPage.prototype, "mapRef", void 0);
 RestaurantesCercanosPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-restaurantes-cercanos',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\restaurantes-cercanos\restaurantes-cercanos.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>\n\n      Restaurantes cercanos\n\n    </ion-title>\n\n    <ion-buttons end>\n\n      <button ion-button icon-only>\n\n        <ion-icon name="refresh"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page7" style="background-color:#E44045;">\n\n  <div #map id="map"></div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\restaurantes-cercanos\restaurantes-cercanos.html"*/
+        selector: 'page-restaurantes-cercanos',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\restaurantes-cercanos\restaurantes-cercanos.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>\n\n      Restaurantes cercanos\n\n    </ion-title>\n\n    <ion-buttons end>\n\n      <button ion-button icon-only>\n\n        <ion-icon name="refresh"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page7" style="background-color:#E44045;">\n\n  <div #map id="map"></div>\n\n  <div class="spacer" style="width:300px;height:9px;" id="inicio-spacer2"></div>\n\n  <h3 id="inicio-heading3" style="color:rgb(255, 255, 255);text-align:center;">\n\n    Selecciona uno de los íconos en el mapa para ver el restaurante y su menú.\n\n  </h3>\n\n</ion-content>'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\restaurantes-cercanos\restaurantes-cercanos.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]])
 ], RestaurantesCercanosPage);
 
-var _a, _b;
 //# sourceMappingURL=restaurantes-cercanos.js.map
 
 /***/ }),
@@ -647,18 +591,35 @@ var ViewordersPage = (function () {
         this.userService = userService;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        this.timePassed = [];
     }
     ViewordersPage.prototype.ionViewDidEnter = function () {
         var _this = this;
         this.userService.getOrders().then(function (data) {
             _this.orders = data;
+            _this.dates = [];
+            _this.getDates(0);
         });
+    };
+    ViewordersPage.prototype.getDates = function (i) {
+        if (i < this.orders.length) {
+            var tempDate = new Date(this.orders[i].date);
+            this.orders[i].date = tempDate.getDate() + " " + this.months[tempDate.getMonth()] + ", " + tempDate.getFullYear();
+            this.getDates(i + 1);
+            var now = new Date();
+            var timePassed = now.getTime() - tempDate.getTime();
+            var mins = Math.floor((timePassed % 3600000) / 60000);
+            var hrs = Math.floor(timePassed / 3600000) % 24;
+            var days = Math.floor(timePassed / 3600000 / 24);
+            this.orders[i].timePassed = days + "d " + hrs + "h " + mins + "mins";
+        }
     };
     return ViewordersPage;
 }());
 ViewordersPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-vieworders',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\vieworders\vieworders.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n  	<button ion-button menuToggle>\n\n  		<ion-icon name="menu"></ion-icon>\n\n  	</button>\n\n    <ion-title>Ordenes</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n<ion-content padding style="background-color:#E44045;">\n\n\n\n	<ion-list>\n\n		<ion-item color="assertive"  id="categorAs-list-item13" *ngFor="let order of orders">\n\n	      <ion-card>\n\n	        <ion-item>\n\n	          <ion-row>\n\n	            <ion-col>\n\n	              <ion-avatar item-start>\n\n	                <img src="assets/img/Users-User-Male-2-icon.png">\n\n	              </ion-avatar>\n\n	            </ion-col>\n\n	            <ion-col text-right>\n\n	              <button ion-button icon-left clear on-click="handleDeleteOrder(order)">\n\n	                <ion-icon name="close-circle"></ion-icon><div>Eliminar</div>\n\n	              </button>\n\n	            </ion-col>\n\n	          </ion-row>\n\n	          <h2>{{order.firstName}} {{order.lastName}}</h2>\n\n	          <p>{{order.date}}</p>\n\n	          \n\n	        </ion-item>\n\n\n\n	        <ion-item *ngFor="let item of order.items">\n\n	          <p>{{ item.name }}</p>\n\n	         </ion-item>\n\n	        <ion-row>\n\n	          <ion-col>\n\n	            <button ion-button icon-left clear small on-click="handleCompleteOrder(order)">\n\n	              <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle">\n\n\n\n	              </ion-icon>\n\n	              <div>{{order.status}}</div>\n\n	            </button>\n\n	            </ion-col>\n\n	            <ion-col center text-center>\n\n	              <ion-note>\n\n	                 {{order.date}}\n\n	              </ion-note>\n\n	            </ion-col>\n\n	        </ion-row>\n\n	      </ion-card>\n\n	    </ion-item>\n\n	</ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\vieworders\vieworders.html"*/,
+        selector: 'page-vieworders',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\vieworders\vieworders.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n  	<button ion-button menuToggle>\n\n  		<ion-icon name="memu"></ion-icon>\n\n  	</button>\n\n    <ion-title>Ordenes</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n<ion-content padding style="background-color:#E44045;">\n\n	<ion-list>\n\n		<ion-item color="assertive"  id="categorAs-list-item13" *ngFor="let order of orders | reverse">\n\n			<ion-card>\n\n				<ion-item>\n\n					<ion-avatar item-start>\n\n						<img src="img/marty-avatar.png">\n\n					</ion-avatar>\n\n					<h2>{{order.firstName}} {{order.lastName}}</h2>\n\n					<p> Fecha: {{order.date}}</p>\n\n					<p> Estado de orden: {{order.status}}</p>\n\n                    <p> Restaurante: {{order.restaurant}}\n\n				</ion-item>\n\n\n\n				<ion-card-content>\n\n						<ion-item *ngFor="let item of order.items">\n\n								<p>{{ item.name }}</p>\n\n						</ion-item>\n\n				</ion-card-content>\n\n\n\n				<ion-row>\n\n                    <ion-col center text-center>\n\n                      <ion-note>\n\n                        hace {{order.timePassed}}\n\n                      </ion-note>\n\n                    </ion-col>\n\n					<ion-col text-right>\n\n        	            <button ion-button icon-left clear on-click="handleDeleteOrder(order)">\n\n        	              <ion-icon name="close-circle"></ion-icon><div>Eliminar</div>\n\n        	            </button>\n\n                   </ion-col>\n\n				</ion-row>\n\n\n\n			</ion-card>\n\n	  </ion-item>\n\n	</ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\vieworders\vieworders.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_user_users__["a" /* UserProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]])
 ], ViewordersPage);
@@ -831,6 +792,7 @@ var PerfilPage = (function () {
     }
     PerfilPage.prototype.ionViewDidEnter = function () {
         var _this = this;
+        console.log('queonda');
         this.userService.getUser().then(function (data) {
             _this.user = data;
             _this.friends = [];
@@ -857,12 +819,11 @@ var PerfilPage = (function () {
 }());
 PerfilPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-perfil',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\perfil\perfil.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>\n\n      Perfil\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page20" style="background-color:#E44045;">\n\n\n\n  <ion-card>\n\n    <img src="assets/img/Users-User-Male-2-icon.png" style="display:block;width:15%;height:auto;margin-left:auto;margin-right:auto;"/>\n\n    <div></div>\n\n    <ion-item text-center *ngIf="!!user">\n\n      <ion-card-title>{{user.firstName}} {{user.lastName}}</ion-card-title>\n\n      <h2>{{user.username}}</h2>\n\n    </ion-item>\n\n  </ion-card>\n\n  <ion-card>\n\n    <ion-row>\n\n      <ion-col text-left><ion-card-title style="padding-right:10%;">Amigos</ion-card-title></ion-col>\n\n      <ion-col text-right>\n\n        <button ion-button icon-left clear on-click="addFriend()">\n\n          <ion-icon name="add-circle"></ion-icon><div> Agregar Amigos</div>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n   <!--  <ion-item *ngFor="let friend of friends" on-tap="viewProfile(friend)">\n\n\n\n    </ion-item> -->\n\n  </ion-card>\n\n\n\n   <ion-item *ngFor="let friend of friends">\n\n      <ion-item>\n\n            <ion-row>\n\n              <ion-col>\n\n                <ion-avatar item-start>\n\n                  <img src="assets/img/Users-User-Male-2-icon.png">\n\n                </ion-avatar>\n\n              </ion-col>\n\n              <ion-col text-right>\n\n                <button ion-button icon-left clear on-click="viewUser(friend)"><div>Ver Perfil</div>\n\n                </button>\n\n              </ion-col>\n\n            </ion-row>\n\n            <h2>{{friend.firstName}} {{friend.lastName}}</h2>\n\n            <p>{{friend.username}}</p>\n\n      </ion-item>\n\n    </ion-item>\n\n\n\n\n\n  <!-- <form id="perfil-form7">\n\n    <div id="perfil-markdown11" class="show-list-numbers-and-dots">\n\n      <p style="color:#000000;">\n\n        Nombre de usuario\n\n      </p>\n\n    </div>\n\n    <ion-item id="perfil-input12">\n\n      <ion-input type="text" placeholder=""></ion-input>\n\n    </ion-item>\n\n    <div id="perfil-markdown12" class="show-list-numbers-and-dots">\n\n      <p style="color:#000000;">\n\n        Correo Electrónico\n\n      </p>\n\n    </div>\n\n    <ion-item id="perfil-input13">\n\n      \n\n      <ion-input type="text" placeholder=""></ion-input>\n\n    </ion-item>\n\n    <div id="perfil-markdown10" class="show-list-numbers-and-dots">\n\n      <p style="color:#000000;">\n\n        Contraseña\n\n      </p>\n\n    </div>\n\n    <ion-item id="perfil-input14">\n\n      <ion-input type="password" placeholder=""></ion-input>\n\n    </ion-item>\n\n    <div id="perfil-markdown10" class="show-list-numbers-and-dots">\n\n      <p style="color:#000000;">\n\n        Confirmar Contraseña\n\n      </p>\n\n    </div>\n\n    <ion-item id="perfil-input14">\n\n      <ion-input type="password" placeholder=""></ion-input>\n\n    </ion-item>\n\n  </form>\n\n  <div class="spacer" style="width:300px;height:18px;" id="pedidosRecientes-spacer4"></div>\n\n  <button id="pedidosRecientes-button17" ion-button color="assertive" icon-left style="color:#FFFFFF;" on-click="regresar();">\n\n    Confirmar datos\n\n  </button> -->\n\n</ion-content>'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\perfil\perfil.html"*/
+        selector: 'page-perfil',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\perfil\perfil.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>\n\n      Perfil\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page20" style="background-color:#E44045;">\n\n\n\n  <ion-card>\n\n    <img src="assets/img/Users-User-Male-2-icon.png" style="display:block;width:15%;height:auto;margin-left:auto;margin-right:auto;"/> \n\n    <div></div>\n\n     <ion-item text-center *ngIf="!!user"> \n\n      <ion-card-title>{{user.firstName}} {{user.lastName}}</ion-card-title> \n\n      <h2>{{user.username}}</h2> \n\n    </ion-item>\n\n  </ion-card>\n\n  <ion-card>\n\n    <ion-row>\n\n      <ion-col text-left><ion-card-title style="padding-right:10%;">Amigos</ion-card-title></ion-col> \n\n      <ion-col text-right>\n\n         <button ion-button icon-left clear on-click="addFriend()"> \n\n          <ion-icon name="add-circle"></ion-icon><div> Agregar Amigos</div>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-card>\n\n<ion-item *ngFor="let friend of friends"> \n\n      <ion-item> \n\n            <ion-row> \n\n              <ion-col> \n\n                <ion-avatar item-start> \n\n                  <img src="assets/img/Users-User-Male-2-icon.png"> \n\n                </ion-avatar> \n\n              </ion-col> \n\n              <ion-col text-right> \n\n                <button ion-button icon-left clear on-click="viewUser(friend)"><div>Ver Perfil</div> \n\n                </button> \n\n              </ion-col> \n\n            </ion-row> \n\n            <h2>{{friend.firstName}} {{friend.lastName}}</h2> \n\n            <p>{{friend.username}}</p> \n\n      </ion-item> \n\n    </ion-item> \n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\perfil\perfil.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__providers_user_users__["a" /* UserProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_user_users__["a" /* UserProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__providers_user_users__["a" /* UserProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]])
 ], PerfilPage);
 
-var _a, _b;
 //# sourceMappingURL=perfil.js.map
 
 /***/ }),
@@ -910,17 +871,19 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_vieworders_vieworders__ = __webpack_require__(209);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_buscar_usuarios_buscar_usuarios__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__angular_http__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_status_bar__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_splash_screen__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__providers_information_information__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__providers_user_users__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__providers_user_order__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24_ngx_pipes__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_status_bar__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__ionic_native_splash_screen__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__providers_information_information__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__providers_user_users__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__providers_user_order__ = __webpack_require__(284);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -980,6 +943,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_22__pages_buscar_usuarios_buscar_usuarios__["a" /* BuscarUsuariosPage */]
         ],
         imports: [
+            __WEBPACK_IMPORTED_MODULE_24_ngx_pipes__["a" /* NgPipesModule */],
             __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_23__angular_http__["c" /* HttpModule */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
@@ -1013,12 +977,12 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_22__pages_buscar_usuarios_buscar_usuarios__["a" /* BuscarUsuariosPage */]
         ],
         providers: [
-            __WEBPACK_IMPORTED_MODULE_24__ionic_native_status_bar__["a" /* StatusBar */],
-            __WEBPACK_IMPORTED_MODULE_25__ionic_native_splash_screen__["a" /* SplashScreen */],
+            __WEBPACK_IMPORTED_MODULE_25__ionic_native_status_bar__["a" /* StatusBar */],
+            __WEBPACK_IMPORTED_MODULE_26__ionic_native_splash_screen__["a" /* SplashScreen */],
             { provide: __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] },
-            __WEBPACK_IMPORTED_MODULE_26__providers_information_information__["a" /* InformationProvider */],
-            __WEBPACK_IMPORTED_MODULE_27__providers_user_users__["a" /* UserProvider */],
-            __WEBPACK_IMPORTED_MODULE_28__providers_user_order__["a" /* OrderProvider */]
+            __WEBPACK_IMPORTED_MODULE_27__providers_information_information__["a" /* InformationProvider */],
+            __WEBPACK_IMPORTED_MODULE_28__providers_user_users__["a" /* UserProvider */],
+            __WEBPACK_IMPORTED_MODULE_29__providers_user_order__["a" /* OrderProvider */]
         ]
     })
 ], AppModule);
@@ -1102,6 +1066,7 @@ var UserProvider = (function () {
     };
     UserProvider.prototype.postOrder = function (order) {
         var _this = this;
+        order.restaurant = this.currentRestaurant;
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Content-Type', 'application/json');
         order.owner = this.userID;
@@ -1110,7 +1075,6 @@ var UserProvider = (function () {
                 .map(function (res) { return res.json(); })
                 .subscribe(function (data) {
                 _this.data = data;
-                alert(data.message);
                 resolve(_this.data);
             });
         });
@@ -1126,17 +1090,26 @@ var UserProvider = (function () {
             });
         });
     };
-    UserProvider.prototype.addToCart = function (item) {
-        var cartData = {
-            userID: this.userID,
-            itemID: item
-        };
-        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
-        headers.append('Content-Type', 'application/json');
-        this.http.post(this.url + '/api/user/cart', JSON.stringify(cartData), { headers: headers })
-            .subscribe(function (res) {
-            console.log(res.json());
-        });
+    UserProvider.prototype.addToCart = function (item, restaurant) {
+        if (this.currentRestaurant == "" || this.currentRestaurant == restaurant) {
+            if (this.currentRestaurant == "")
+                this.currentRestaurant = restaurant;
+            var cartData = {
+                userID: this.userID,
+                itemID: item,
+                restaurant: restaurant
+            };
+            var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+            headers.append('Content-Type', 'application/json');
+            this.http.post(this.url + '/api/user/cart', JSON.stringify(cartData), { headers: headers })
+                .subscribe(function (res) {
+                console.log(res.json());
+            });
+            return true;
+        }
+        else {
+            return false;
+        }
     };
     UserProvider.prototype.getCartByUser = function () {
         var _this = this;
@@ -1156,6 +1129,8 @@ var UserProvider = (function () {
                 .map(function (res) { return res.json(); })
                 .subscribe(function (data) {
                 _this.data = data;
+                if (_this.data.length == 0)
+                    _this.currentRestaurant = "";
                 resolve(_this.data);
             });
         });
@@ -1178,6 +1153,7 @@ var UserProvider = (function () {
         return this.http.post(this.url + '/users/signup', JSON.stringify(user), { headers: headers })
             .map(function (res) {
             _this.userID = res.json().userID;
+            _this.currentRestaurant = "";
             return res;
         });
     };
@@ -1188,7 +1164,7 @@ var UserProvider = (function () {
         return this.http.post(this.url + '/users/signin', JSON.stringify(user), { headers: headers })
             .map(function (res) {
             _this.userID = res.json().userID;
-            _this.user = res.json();
+            _this.currentRestaurant = res.json().restaurant;
             return res;
         });
     };
@@ -1196,10 +1172,9 @@ var UserProvider = (function () {
 }());
 UserProvider = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
 ], UserProvider);
 
-var _a;
 //# sourceMappingURL=users.js.map
 
 /***/ }),
@@ -1378,7 +1353,7 @@ PlatoPage = __decorate([
 
 /***/ }),
 
-/***/ 283:
+/***/ 284:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1524,7 +1499,16 @@ var PlatosPage = (function () {
         });
     };
     PlatosPage.prototype.addToCart = function (itemID) {
-        this.userService.addToCart(itemID);
+        if (!this.userService.addToCart(itemID, this.restaurant))
+            this.alertError("No puede reservar en dos restaurantes al mismo tiempo.");
+    };
+    PlatosPage.prototype.alertError = function (msg) {
+        var alert = this.alertCtrl.create({
+            title: "Error",
+            subTitle: msg,
+            buttons: ['OK']
+        });
+        alert.present();
     };
     return PlatosPage;
 }());

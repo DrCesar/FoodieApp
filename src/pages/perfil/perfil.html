@@ -11,65 +11,40 @@
 <ion-content padding id="page20" style="background-color:#E44045;">
 
   <ion-card>
-    <img src="assets/img/profilepic.jpg" style="display:block;width:15%;height:auto;margin-left:auto;margin-right:auto;"/>
+    <img src="assets/img/Users-User-Male-2-icon.png" style="display:block;width:15%;height:auto;margin-left:auto;margin-right:auto;"/> 
     <div></div>
-    <ion-item>
-      <h2></h2>
-      <h2></h2>
+     <ion-item text-center *ngIf="!!user"> 
+      <ion-card-title>{{user.firstName}} {{user.lastName}}</ion-card-title> 
+      <h2>{{user.username}}</h2> 
     </ion-item>
   </ion-card>
   <ion-card>
     <ion-row>
-      <ion-col text-left><h2>Amigos</h2></ion-col>
+      <ion-col text-left><ion-card-title style="padding-right:10%;">Amigos</ion-card-title></ion-col> 
       <ion-col text-right>
-        <button ion-button clear on-click="addFriend()">
+         <button ion-button icon-left clear on-click="addFriend()"> 
           <ion-icon name="add-circle"></ion-icon><div> Agregar Amigos</div>
         </button>
       </ion-col>
     </ion-row>
-   <!--  <ion-item *ngFor="let friend of friends" on-tap="viewProfile(friend)">
-
-    </ion-item> -->
   </ion-card>
+<ion-item *ngFor="let friend of friends"> 
+      <ion-item> 
+            <ion-row> 
+              <ion-col> 
+                <ion-avatar item-start> 
+                  <img src="assets/img/Users-User-Male-2-icon.png"> 
+                </ion-avatar> 
+              </ion-col> 
+              <ion-col text-right> 
+                <button ion-button icon-left clear on-click="viewUser(friend)"><div>Ver Perfil</div> 
+                </button> 
+              </ion-col> 
+            </ion-row> 
+            <h2>{{friend.firstName}} {{friend.lastName}}</h2> 
+            <p>{{friend.username}}</p> 
+      </ion-item> 
+    </ion-item> 
 
 
-  <!-- <form id="perfil-form7">
-    <div id="perfil-markdown11" class="show-list-numbers-and-dots">
-      <p style="color:#000000;">
-        Nombre de usuario
-      </p>
-    </div>
-    <ion-item id="perfil-input12">
-      <ion-input type="text" placeholder=""></ion-input>
-    </ion-item>
-    <div id="perfil-markdown12" class="show-list-numbers-and-dots">
-      <p style="color:#000000;">
-        Correo Electrónico
-      </p>
-    </div>
-    <ion-item id="perfil-input13">
-      
-      <ion-input type="text" placeholder=""></ion-input>
-    </ion-item>
-    <div id="perfil-markdown10" class="show-list-numbers-and-dots">
-      <p style="color:#000000;">
-        Contraseña
-      </p>
-    </div>
-    <ion-item id="perfil-input14">
-      <ion-input type="password" placeholder=""></ion-input>
-    </ion-item>
-    <div id="perfil-markdown10" class="show-list-numbers-and-dots">
-      <p style="color:#000000;">
-        Confirmar Contraseña
-      </p>
-    </div>
-    <ion-item id="perfil-input14">
-      <ion-input type="password" placeholder=""></ion-input>
-    </ion-item>
-  </form>
-  <div class="spacer" style="width:300px;height:18px;" id="pedidosRecientes-spacer4"></div>
-  <button id="pedidosRecientes-button17" ion-button color="assertive" icon-left style="color:#FFFFFF;" on-click="regresar();">
-    Confirmar datos
-  </button> -->
 </ion-content>
