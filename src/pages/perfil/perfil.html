@@ -9,7 +9,31 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page20" style="background-color:#E44045;">
-  <form id="perfil-form7">
+
+  <ion-card>
+    <img src="assets/img/profilepic.jpg" style="display:block;width:15%;height:auto;margin-left:auto;margin-right:auto;"/>
+    <div></div>
+    <ion-item>
+      <h2></h2>
+      <h2></h2>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-row>
+      <ion-col text-left><h2>Amigos</h2></ion-col>
+      <ion-col text-right>
+        <button ion-button clear on-click="addFriend()">
+          <ion-icon name="add-circle"></ion-icon><div> Agregar Amigos</div>
+        </button>
+      </ion-col>
+    </ion-row>
+   <!--  <ion-item *ngFor="let friend of friends" on-tap="viewProfile(friend)">
+
+    </ion-item> -->
+  </ion-card>
+
+
+  <!-- <form id="perfil-form7">
     <div id="perfil-markdown11" class="show-list-numbers-and-dots">
       <p style="color:#000000;">
         Nombre de usuario
@@ -47,5 +71,5 @@
   <div class="spacer" style="width:300px;height:18px;" id="pedidosRecientes-spacer4"></div>
   <button id="pedidosRecientes-button17" ion-button color="assertive" icon-left style="color:#FFFFFF;" on-click="regresar();">
     Confirmar datos
-  </button>
+  </button> -->
 </ion-content>

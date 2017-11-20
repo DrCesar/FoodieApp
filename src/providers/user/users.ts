@@ -14,6 +14,19 @@ export class UserProvider {
 		this.data = null;
 	}
 
+
+	getUser() {
+		
+		return new Promise(resolve => {
+			this.http.get(this.url + '/api/user/' + this.userID)
+			 	.map(res => res.json())
+			 	.subscribe(data => {
+			 		this.data = data;
+			 		resolve(this.data);
+			 	})
+		})
+	}
+
 	postOrder(order) {
 
 		let headers = new Headers();

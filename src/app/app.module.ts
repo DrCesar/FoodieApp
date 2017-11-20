@@ -20,6 +20,7 @@ import { PlatoPage } from '../pages/plato/plato';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { PagoPage } from '../pages/pago/pago';
 import { ViewordersPage } from '../pages/vieworders/vieworders';
+import { BuscarUsuariosPage } from '../pages/buscar-usuarios/buscar-usuarios';
 import { HttpModule } from '@angular/http';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -48,7 +49,8 @@ import { OrderProvider } from '../providers/user/order';
     PlatoPage,
     PerfilPage,
     PagoPage,
-    ViewordersPage
+    ViewordersPage,
+    BuscarUsuariosPage
   ],
   imports: [
     BrowserModule,
@@ -75,7 +77,8 @@ import { OrderProvider } from '../providers/user/order';
     PlatoPage,
     PerfilPage,
     PagoPage,
-    ViewordersPage
+    ViewordersPage,
+    BuscarUsuariosPage
   ],
   providers: [
     StatusBar,
