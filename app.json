@@ -1,6 +1,6 @@
 {
-    "name": "AppName",
+    "name": "Foodie",
     "description": "App Description",
     "repository": "https://github.com/DrCesar/FoodieApp",
-    "keywords": ["ionic2", "heroku", "pereless360"]
+    "keywords": ["ionic3", "heroku"]
 }
