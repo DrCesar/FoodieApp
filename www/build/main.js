@@ -269,7 +269,7 @@ var BuscarUsuariosPage = (function () {
 BuscarUsuariosPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-buscar-usuarios',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\buscar-usuarios\buscar-usuarios.html"*/'<!--\n\n  Generated template for the BuscarUsuariosPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n	<ion-navbar>\n\n		<ion-title>BuscarUsuarios</ion-title>\n\n	</ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n	<ion-item id="login-input1">\n\n		<ion-label></ion-label>\n\n		<ion-input type="text"  [(ngModel)]="username"  name="something" placeholder="Usuario"></ion-input>\n\n	</ion-item>\n\n\n\n	<button ion-button color="secondary" block small on-click="searchUsers()">Buscar</button>\n\n\n\n    <ion-item *ngFor="let user of results">\n\n     	<ion-item>\n\n	          <ion-row>\n\n	            <ion-col>\n\n	              <ion-avatar item-start>\n\n	                <img src="assets/img/Users-User-Male-2-icon.png">\n\n	              </ion-avatar>\n\n	            </ion-col>\n\n	            <ion-col text-right>\n\n	              <button ion-button icon-left clear on-click="addUser(user)">\n\n	                <ion-icon name="checkmark-circle"></ion-icon><div>Agregar</div>\n\n	              </button>\n\n	            </ion-col>\n\n	          </ion-row>\n\n	          <h2>{{user.firstName}} {{user.lastName}}</h2>\n\n	          <p>{{user.username}}</p>\n\n	    </ion-item>\n\n    </ion-item> \n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\buscar-usuarios\buscar-usuarios.html"*/,
+        selector: 'page-buscar-usuarios',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\buscar-usuarios\buscar-usuarios.html"*/'<!--\n\n  Generated template for the BuscarUsuariosPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>BuscarUsuarios</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\buscar-usuarios\buscar-usuarios.html"*/,
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_user_users__["a" /* UserProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_user_users__["a" /* UserProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _d || Object])
 ], BuscarUsuariosPage);
@@ -514,6 +514,7 @@ PedidoActualPage = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RestaurantesCercanosPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__categor_as_categor_as__ = __webpack_require__(32);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -525,6 +526,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var RestaurantesCercanosPage = (function () {
     function RestaurantesCercanosPage(navCtrl) {
         this.navCtrl = navCtrl;
@@ -533,26 +535,83 @@ var RestaurantesCercanosPage = (function () {
         this.showMap();
     };
     RestaurantesCercanosPage.prototype.showMap = function () {
+        var _this = this;
+        var image = 'https://www.pcmag.com/img/no-author-icon.svg';
         var location = new google.maps.LatLng(14.604610, -90.488846);
+        var location1 = new google.maps.LatLng(14.603997, -90.488376);
+        var location2 = new google.maps.LatLng(14.608441, -90.486660);
+        var location3 = new google.maps.LatLng(14.595465, -90.495898);
         var options = {
             center: location,
+            mapTypeControl: false,
+            streetViewControl: false,
             zoom: 16
         };
         this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+        var marker = new google.maps.Marker({
+            map: this.map,
+            position: location,
+            title: "Esta es tu posición",
+            icon: image,
+            clickable: true
+        });
+        var marker1 = new google.maps.Marker({
+            map: this.map,
+            position: location1,
+            title: "LinLin",
+            clickable: true
+        });
+        var infowindow1 = new google.maps.InfoWindow({
+            content: "LinLin"
+        });
+        var marker2 = new google.maps.Marker({
+            map: this.map,
+            position: location2,
+            title: "L'albero",
+            clickable: true
+        });
+        var infowindow2 = new google.maps.InfoWindow({
+            content: "L'albero"
+        });
+        var marker3 = new google.maps.Marker({
+            map: this.map,
+            position: location3,
+            title: "Tacostumbras",
+            clickable: true
+        });
+        var infowindow3 = new google.maps.InfoWindow({
+            content: "Tacostumbras"
+        });
+        marker1.addListener('click', function () {
+            var data = { restaurant: 'LinLin' };
+            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__categor_as_categor_as__["a" /* CategorAsPage */], data);
+        });
+        infowindow1.open(this.map, marker1);
+        marker2.addListener('click', function () {
+            var data = { restaurant: "L'albero" };
+            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__categor_as_categor_as__["a" /* CategorAsPage */], data);
+        });
+        infowindow2.open(this.map, marker2);
+        marker3.addListener('click', function () {
+            var data = { restaurant: 'Tacostumbras' };
+            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__categor_as_categor_as__["a" /* CategorAsPage */], data);
+        });
+        infowindow3.open(this.map, marker3);
     };
     return RestaurantesCercanosPage;
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])('map'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */])
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */]) === "function" && _a || Object)
 ], RestaurantesCercanosPage.prototype, "mapRef", void 0);
 RestaurantesCercanosPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-restaurantes-cercanos',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\restaurantes-cercanos\restaurantes-cercanos.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>\n\n      Restaurantes cercanos\n\n    </ion-title>\n\n    <ion-buttons end>\n\n      <button ion-button icon-only>\n\n        <ion-icon name="refresh"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page7" style="background-color:#E44045;">\n\n  <div #map id="map"></div>\n\n  <div class="spacer" style="width:300px;height:9px;" id="inicio-spacer2"></div>\n\n  <h3 id="inicio-heading3" style="color:rgb(255, 255, 255);text-align:center;">\n\n    Selecciona uno de los íconos en el mapa para ver el restaurante y su menú.\n\n  </h3>\n\n</ion-content>'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\restaurantes-cercanos\restaurantes-cercanos.html"*/
+        selector: 'page-restaurantes-cercanos',template:/*ion-inline-start:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\restaurantes-cercanos\restaurantes-cercanos.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>\n\n      Restaurantes cercanos\n\n    </ion-title>\n\n    <ion-buttons end>\n\n      <button ion-button icon-only>\n\n        <ion-icon name="refresh"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page7" style="background-color:#E44045;">\n\n  <div #map id="map"></div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\WadeOwen\Documents\GitHub\Foodie\App\src\pages\restaurantes-cercanos\restaurantes-cercanos.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _b || Object])
 ], RestaurantesCercanosPage);
 
+var _a, _b;
 //# sourceMappingURL=restaurantes-cercanos.js.map
 
 /***/ }),
