@@ -22,6 +22,7 @@ jobs:
     
     - stage: Start Server
       script:
+        - npm install
         
     - stage: Unit Tests Server
       script:
