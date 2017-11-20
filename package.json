@@ -8,7 +8,6 @@
         "clean": "ionic-app-scripts clean",
         "build": "ionic-app-scripts build",
         "lint": "ionic-app-scripts lint",
-        "ionic:build": "ionic-app-scripts build",
         "ionic:watch": "ionic-app-scripts watch",
         "postinstall": "ionic-app-scripts build"
     },
@@ -39,7 +38,8 @@
     "devDependencies": {
         "@ionic/app-scripts": "2.1.4",
         "ionic": "3.18.0",
-        "typescript": "2.3.4"
+        "typescript": "2.3.4",
+        "node": "^6.11.1"
     },
     "description": "An  Ionic project",
     "cordova": {
