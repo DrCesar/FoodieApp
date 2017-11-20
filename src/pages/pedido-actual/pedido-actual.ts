@@ -155,12 +155,18 @@ export class PedidoActualPage {
   }
 
   postOrder() {
-    this.order.items = this.cart;
-    this.order.restaurant = "LinLin";
-    this.userService.postOrder(this.order).then(data => {
-      this.navCtrl.parent.select(0);
-    });
-
+    if (this.cart.length > 0){
+        this.order.items = this.cart;
+        this.userService.postOrder(this.order).then((data) => {
+          this.navCtrl.parent.select(0);
+          this.deleteAll();
+            let alert = this.alertCtrl.create({
+              title: "Orden creada con éxito!",
+              buttons: ['OK']
+            });
+            alert.present();
+        });
+    }
   }
 
 }

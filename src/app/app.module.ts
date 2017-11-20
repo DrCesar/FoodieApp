@@ -22,6 +22,7 @@ import { PagoPage } from '../pages/pago/pago';
 import { ViewordersPage } from '../pages/vieworders/vieworders';
 import { BuscarUsuariosPage } from '../pages/buscar-usuarios/buscar-usuarios';
 import { HttpModule } from '@angular/http';
+import {NgPipesModule} from 'ngx-pipes';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -53,6 +54,7 @@ import { OrderProvider } from '../providers/user/order';
     BuscarUsuariosPage
   ],
   imports: [
+    NgPipesModule,
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp)

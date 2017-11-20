@@ -25,17 +25,18 @@ export class LoginPage {
   }
 
   signin(user: User) {
-    if (user) {
-      this.usrService.signin(user).subscribe(data => {
-        if (data.json().message == "Inicio de Sesion.")
-          this.navCtrl.push(TabsControllerPage);
-        else
-          alert(data.json().message);
-      });
-    } else {
-      alert("Faltan campos");
+      if (user) {
+        this.usrService.signin(user).subscribe(data => {
+
+          if (data.json().message == "Inicio de Sesion.")
+            this.navCtrl.push(TabsControllerPage);
+          else
+            alert(data.json().message);
+        });
+      } else {
+        alert("Faltan campos");
+      }
     }
-  }
 
   alert(info) {
     let alert = this.alertCtrl.create({

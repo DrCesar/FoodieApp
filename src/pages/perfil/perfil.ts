@@ -11,31 +11,21 @@ import { BuscarUsuariosPage } from '../buscar-usuarios/buscar-usuarios';
 export class PerfilPage {
 
 	user: any;
-	friends: any[];
+	friends: any;
 
 	constructor(private userService: UserProvider, public navCtrl: NavController) {
 	}
 
-	ionViewDidEnter() {
+	ionViewDidLoad() {
+		console.log('queonda');
 		this.userService.getUser().then(data => {
 			this.user = data;
-			this.friends = [];
-			console.log(data['friends'].length);
-			for(var i = 0;  i< data['friends'].length; i++) {
-				console.log(data['friends'][i]);
-				this.userService.searchUserID(data['friends'][i]).then(user => {
-					this.friends.push(user);
-				});
-			}
-		});
+			console.log(data);
+		})
 	}
 
 	addFriend() {
 		this.navCtrl.push(BuscarUsuariosPage);
-	}
-
-	viewUser(user) {
-
 	}
 
 

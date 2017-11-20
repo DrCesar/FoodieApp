@@ -33,7 +33,17 @@ export class PlatosPage {
   }
 
   addToCart(itemID) {
-      this.userService.addToCart(itemID);
+      if (!this.userService.addToCart(itemID, this.restaurant))
+        this.alertError("No puede reservar en dos restaurantes al mismo tiempo.")
+  }
+
+  alertError(msg) {
+    let alert = this.alertCtrl.create({
+      title: "Error",
+      subTitle: msg,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
 }

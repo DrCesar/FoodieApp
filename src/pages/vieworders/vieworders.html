@@ -3,55 +3,47 @@
 
   <ion-navbar>
   	<button ion-button menuToggle>
-  		<ion-icon name="menu"></ion-icon>
+  		<ion-icon name="memu"></ion-icon>
   	</button>
     <ion-title>Ordenes</ion-title>
   </ion-navbar>
 
 </ion-header>
 <ion-content padding style="background-color:#E44045;">
-
 	<ion-list>
-		<ion-item color="assertive"  id="categorAs-list-item13" *ngFor="let order of orders">
-	      <ion-card>
-	        <ion-item>
-	          <ion-row>
-	            <ion-col>
-	              <ion-avatar item-start>
-	                <img src="assets/img/Users-User-Male-2-icon.png">
-	              </ion-avatar>
-	            </ion-col>
-	            <ion-col text-right>
-	              <button ion-button icon-left clear on-click="handleDeleteOrder(order)">
-	                <ion-icon name="close-circle"></ion-icon><div>Eliminar</div>
-	              </button>
-	            </ion-col>
-	          </ion-row>
-	          <h2>{{order.firstName}} {{order.lastName}}</h2>
-	          <p>{{order.date}}</p>
-	          
-	        </ion-item>
+		<ion-item color="assertive"  id="categorAs-list-item13" *ngFor="let order of orders | reverse">
+			<ion-card>
+				<ion-item>
+					<ion-avatar item-start>
+						<img src="img/marty-avatar.png">
+					</ion-avatar>
+					<h2>{{order.firstName}} {{order.lastName}}</h2>
+					<p> Fecha: {{order.date}}</p>
+					<p> Estado de orden: {{order.status}}</p>
+                    <p> Restaurante: {{order.restaurant}}
+				</ion-item>
 
-	        <ion-item *ngFor="let item of order.items">
-	          <p>{{ item.name }}</p>
-	         </ion-item>
-	        <ion-row>
-	          <ion-col>
-	            <button ion-button icon-left clear small on-click="handleCompleteOrder(order)">
-	              <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle">
+				<ion-card-content>
+						<ion-item *ngFor="let item of order.items">
+								<p>{{ item.name }}</p>
+						</ion-item>
+				</ion-card-content>
 
-	              </ion-icon>
-	              <div>{{order.status}}</div>
-	            </button>
-	            </ion-col>
-	            <ion-col center text-center>
-	              <ion-note>
-	                 {{order.date}}
-	              </ion-note>
-	            </ion-col>
-	        </ion-row>
-	      </ion-card>
-	    </ion-item>
+				<ion-row>
+                    <ion-col center text-center>
+                      <ion-note>
+                        hace {{order.timePassed}}
+                      </ion-note>
+                    </ion-col>
+					<ion-col text-right>
+        	            <button ion-button icon-left clear on-click="handleDeleteOrder(order)">
+        	              <ion-icon name="close-circle"></ion-icon><div>Eliminar</div>
+        	            </button>
+                   </ion-col>
+				</ion-row>
+
+			</ion-card>
+	  </ion-item>
 	</ion-list>
 
 </ion-content>
